@@ -93,7 +93,7 @@ public class HeapFile implements DbFile {
             }
             buffermanager.unpinPage(pid,false);
         }
-        SimplePageId newpid= new SimplePageId(tableid,numPages + 1);
+        SimplePageId newpid= new SimplePageId(tableid,numPages);
         numPages ++;
         buffermanager.allocatePage(newpid);
         SlottedPage newpage = (SlottedPage) buffermanager.pinPage(newpid,pageMaker);
@@ -137,11 +137,12 @@ public class HeapFile implements DbFile {
 
         public HeapFileIterator(TransactionId tid) {
             currentpage = 0;
-            if(numPages > 0){
+            /*if(numPages > 0){
                 SimplePageId pid = new SimplePageId(tableid,0);
                 page = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
                 pageiterator = page.iterator();
             }
+            */
         }
 
         @Override
@@ -151,15 +152,36 @@ public class HeapFile implements DbFile {
 
         @Override
         public boolean hasNext() throws TransactionAbortedException {
-            if(numPages == 0){
+            if(!isopen){
                 return false;
             }
-            
+            if(currentpage == numPages){
+                return false;
+            }
+            if(page == null){
+                SimplePageId pid = new SimplePageId(tableid,currentpage);
+                page = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
+                pageiterator = page.iterator();
+            }
+            boolean iftuple = pageiterator.hasNext();
+            if(iftuple){
+                return iftuple;
+            }
+            else{
+                SimplePageId pid = (SimplePageId) page.getId();
+                buffermanager.unpinPage(pid,false);
+                page = null;
+                currentpage ++;
+                return hasNext();
+            }
         }
 
         @Override
         public Tuple next() throws TransactionAbortedException, NoSuchElementException {
-            throw new UnsupportedOperationException("implement me!");
+            if(!hasNext()){
+                throw new NoSuchElementException();
+            }
+            return pageiterator.next();
         }
 
         @Override
@@ -169,7 +191,12 @@ public class HeapFile implements DbFile {
 
         @Override
         public void close() {
-            throw new UnsupportedOperationException("implement me!");
+            if(page != null){
+                SimplePageId pid = (SimplePageId) page.getId();
+                buffermanager.unpinPage(pid,false);
+                page = null;
+                pageiterator = null;
+            }
         }
     }
 
