@@ -1,14 +1,19 @@
 package colgatedb.dbfile;
 
+import colgatedb.BufferManager;
 import colgatedb.Database;
 import colgatedb.DbException;
 import colgatedb.page.*;
 import colgatedb.transactions.TransactionAbortedException;
 import colgatedb.transactions.TransactionId;
+import colgatedb.tuple.RecordId;
 import colgatedb.tuple.Tuple;
 import colgatedb.tuple.TupleDesc;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -38,6 +43,11 @@ import java.util.NoSuchElementException;
 public class HeapFile implements DbFile {
 
     private final SlottedPageMaker pageMaker;   // this should be initialized in constructor
+    private TupleDesc td;
+    private int pagesize;
+    private int tableid;
+    private int numPages;
+    private BufferManager buffermanager;
 
     /**
      * Creates a heap file.
@@ -47,35 +57,64 @@ public class HeapFile implements DbFile {
      * @param numPages size of this heapfile (i.e., number of pages already stored on disk)
      */
     public HeapFile(TupleDesc td, int pageSize, int tableid, int numPages) {
-        throw new UnsupportedOperationException("implement me!");
+        pageMaker = new SlottedPageMaker(td,pageSize);
+        this.numPages = numPages;
+        this.tableid = tableid;
+        this.td = td;
+        this.pagesize = pageSize;
+        buffermanager = Database.getBufferManager();
     }
 
     /**
      * Returns the number of pages in this HeapFile.
      */
     public int numPages() {
-        throw new UnsupportedOperationException("implement me!");
+        return numPages;
     }
 
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("implement me!");
+        return tableid;
     }
 
     @Override
     public TupleDesc getTupleDesc() {
-        throw new UnsupportedOperationException("implement me!");
+        return td;
     }
+
+
+
+    private SlottedPage findAppropriatePage(){
+        for(int i = 0; i < numPages; i ++){
+            SimplePageId pid = new SimplePageId(tableid,i);
+            SlottedPage temp = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
+            if(temp.getNumEmptySlots() != 0){
+                return temp;
+            }
+            buffermanager.unpinPage(pid,false);
+        }
+        SimplePageId newpid= new SimplePageId(tableid,numPages + 1);
+        numPages ++;
+        buffermanager.allocatePage(newpid);
+        SlottedPage newpage = (SlottedPage) buffermanager.pinPage(newpid,pageMaker);
+        return newpage;
+    }
+
 
     @Override
     public void insertTuple(TransactionId tid, Tuple t) throws TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        SlottedPage page = findAppropriatePage();
+        page.insertTuple(t);
+        buffermanager.unpinPage(page.getId(),true);
     }
 
 
     @Override
     public void deleteTuple(TransactionId tid, Tuple t) throws TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        PageId pid = t.getRecordId().getPageId();
+        SlottedPage page = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
+        page.deleteTuple(t);
+        buffermanager.unpinPage(pid,true);
     }
 
     @Override
@@ -88,18 +127,34 @@ public class HeapFile implements DbFile {
      */
     private class HeapFileIterator implements DbFileIterator {
 
+        private boolean isopen;
+
+        private int currentpage;
+
+        private SlottedPage page;
+
+        private Iterator<Tuple> pageiterator;
+
         public HeapFileIterator(TransactionId tid) {
-            throw new UnsupportedOperationException("implement me!");
+            currentpage = 0;
+            if(numPages > 0){
+                SimplePageId pid = new SimplePageId(tableid,0);
+                page = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
+                pageiterator = page.iterator();
+            }
         }
 
         @Override
         public void open() throws TransactionAbortedException {
-            throw new UnsupportedOperationException("implement me!");
+            isopen = true;
         }
 
         @Override
         public boolean hasNext() throws TransactionAbortedException {
-            throw new UnsupportedOperationException("implement me!");
+            if(numPages == 0){
+                return false;
+            }
+            
         }
 
         @Override
