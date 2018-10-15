@@ -47,17 +47,18 @@ public class BufferManagerImpl implements BufferManager {
     @Override
     public synchronized Page pinPage(PageId pid, PageMaker pageMaker) {
         Frame frame;
-        if(frames.containsKey(pid)){
+        if (frames.containsKey(pid)){
             frame = frames.get(pid);
             frame.pinCount ++;
             lru.remove(frame);
             return frame.page;
         }
-        else if(frames.size() == numPages){
-            if(!evictPage()){
+        else if (frames.size() == numPages){
+            if (!evictPage()){
                 throw new BufferManagerException("The buffer pool is full and cannot find a page to evict");
             }
         }
+        // reads the page from Diskmanager
         Page p = diskManager.readPage(pid, pageMaker);
         frame = new Frame(p);
         frames.put(pid,frame);
@@ -67,18 +68,18 @@ public class BufferManagerImpl implements BufferManager {
 
     @Override
     public synchronized void unpinPage(PageId pid, boolean isDirty) {
-        if(!frames.containsKey(pid)){
+        if (!frames.containsKey(pid)){
             throw new BufferManagerException("pid is not in the cache!");
         }
         Frame temp = frames.get(pid);
-        if(temp.pinCount == 0){
+        if (temp.pinCount == 0){
             throw new BufferManagerException("pin count is already zero!");
         }
         temp.pinCount --;
-        if(!temp.isDirty){
+        if (!temp.isDirty){
             temp.isDirty = isDirty;
         }
-        if(temp.pinCount == 0 && ((!temp.isDirty) || allowEvictDirty)){
+        if (temp.pinCount == 0 && ((!temp.isDirty) || allowEvictDirty)){
             lru.add(temp);
         }
     }
@@ -86,27 +87,31 @@ public class BufferManagerImpl implements BufferManager {
     @Override
     public synchronized void flushPage(PageId pid) {
         Frame temp = frames.get(pid);
-        if(temp.isDirty){
-            diskManager.writePage(temp.page);
-            temp.isDirty = false;
-            if(!allowEvictDirty && temp.pinCount == 0){
-                lru.add(temp);
+        flushPage(temp);
+    }
+
+
+    /**
+     * Helper function for flushing a page
+     * @param fm the frame that is needed to flush
+     */
+    private synchronized void flushPage(Frame fm){
+        if (fm.isDirty){
+            diskManager.writePage(fm.page);
+            fm.isDirty = false;
+            if (!allowEvictDirty && fm.pinCount == 0){
+                lru.add(fm);
             }
         }
     }
 
     @Override
     public synchronized void flushAllPages() {
-        for(Frame frame: frames.values()){
-            if(frame.isDirty){
-                diskManager.writePage(frame.page);
-                frame.isDirty = false;
-                if(!allowEvictDirty && frame.pinCount == 0){
-                    lru.add(frame);
-                }
+        for (Frame frame: frames.values()){
+            flushPage(frame);
             }
         }
-    }
+
 
     @Override
     public synchronized void evictDirty(boolean allowEvictDirty) {
@@ -120,7 +125,7 @@ public class BufferManagerImpl implements BufferManager {
 
     @Override
     public synchronized boolean isDirty(PageId pid) {
-        if(!frames.containsKey(pid)){
+        if (!frames.containsKey(pid)){
             return false;
         }
         return frames.get(pid).isDirty;
@@ -133,7 +138,7 @@ public class BufferManagerImpl implements BufferManager {
 
     @Override
     public synchronized Page getPage(PageId pid) {
-        if(!inBufferPool(pid)){
+        if (!inBufferPool(pid)){
             throw new BufferManagerException("the page is not in cache");
         }
         return frames.get(pid).page;
@@ -156,7 +161,7 @@ public class BufferManagerImpl implements BufferManager {
      */
     public synchronized boolean evictPage(){
         Frame temp = lru.poll();
-        if(temp == null){
+        if (temp == null){
             return false;
         }
         PageId pid = temp.page.getId();
@@ -165,6 +170,7 @@ public class BufferManagerImpl implements BufferManager {
         return true;
     }
 
+    // A comparator that is used to construct a priority queue
     public static Comparator<Frame> frameComparator = new Comparator<Frame>(){
 
         @Override
@@ -185,9 +191,10 @@ public class BufferManagerImpl implements BufferManager {
 
         public Frame(Page page) {
             this.page = page;
-            this.pinCount = 1;   // assumes Frame is created on first pin -- feel free to modify as you see fit
+            this.pinCount = 1;
             this.isDirty = false;
         }
     }
 
 }
+

@@ -180,7 +180,7 @@ public class SlottedPage implements Page {
         if(t.getRecordId().getPageId() != pid){
             throw new PageException("This tuple is not on this page");
         }
-        if(header.cardinality() == 0 ){
+        if(!header.get(t.getRecordId().tupleno()) ){
             throw new PageException("The tuple slot is already empty");
         }
         header.set(t.getRecordId().tupleno(),false);

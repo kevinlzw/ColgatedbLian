@@ -42,9 +42,8 @@ import java.util.NoSuchElementException;
  */
 public class HeapFile implements DbFile {
 
-    private final SlottedPageMaker pageMaker;   // this should be initialized in constructor
+    private final SlottedPageMaker pageMaker;
     private TupleDesc td;
-    private int pagesize;
     private int tableid;
     private int numPages;
     private BufferManager buffermanager;
@@ -61,7 +60,6 @@ public class HeapFile implements DbFile {
         this.numPages = numPages;
         this.tableid = tableid;
         this.td = td;
-        this.pagesize = pageSize;
         buffermanager = Database.getBufferManager();
     }
 
@@ -83,16 +81,21 @@ public class HeapFile implements DbFile {
     }
 
 
-
+    /**
+     * Finds an appropriate page to insert a tuple or allocates a new page if pages in the heapfile are all full
+     * @return the page that can be inserted
+     */
     private SlottedPage findAppropriatePage(){
-        for(int i = 0; i < numPages; i ++){
+        // finds a page with empty slots in it
+        for (int i = 0; i < numPages; i ++){
             SimplePageId pid = new SimplePageId(tableid,i);
             SlottedPage temp = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
-            if(temp.getNumEmptySlots() != 0){
+            if (temp.getNumEmptySlots() != 0){
                 return temp;
             }
             buffermanager.unpinPage(pid,false);
         }
+        // No empty slots available, needs to allocate a new page
         SimplePageId newpid= new SimplePageId(tableid,numPages);
         numPages ++;
         buffermanager.allocatePage(newpid);
@@ -137,12 +140,6 @@ public class HeapFile implements DbFile {
 
         public HeapFileIterator(TransactionId tid) {
             currentpage = 0;
-            /*if(numPages > 0){
-                SimplePageId pid = new SimplePageId(tableid,0);
-                page = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
-                pageiterator = page.iterator();
-            }
-            */
         }
 
         @Override
@@ -152,22 +149,24 @@ public class HeapFile implements DbFile {
 
         @Override
         public boolean hasNext() throws TransactionAbortedException {
-            if(!isopen){
+            if (!isopen){
                 return false;
             }
-            if(currentpage == numPages){
+            if (currentpage == numPages){
                 return false;
             }
-            if(page == null){
+            // sets up a new page to iterate
+            if (page == null){
                 SimplePageId pid = new SimplePageId(tableid,currentpage);
                 page = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
                 pageiterator = page.iterator();
             }
             boolean iftuple = pageiterator.hasNext();
-            if(iftuple){
+            if (iftuple){
                 return iftuple;
             }
-            else{
+            // no available slots in this page, needs to iterate the next page
+            else {
                 SimplePageId pid = (SimplePageId) page.getId();
                 buffermanager.unpinPage(pid,false);
                 page = null;
@@ -178,7 +177,7 @@ public class HeapFile implements DbFile {
 
         @Override
         public Tuple next() throws TransactionAbortedException, NoSuchElementException {
-            if(!hasNext()){
+            if (!hasNext()){
                 throw new NoSuchElementException();
             }
             return pageiterator.next();
@@ -186,17 +185,24 @@ public class HeapFile implements DbFile {
 
         @Override
         public void rewind() throws TransactionAbortedException {
-            throw new UnsupportedOperationException("implement me!");
+            currentpage = 0;
+            if (page != null){
+                SimplePageId pid = (SimplePageId) page.getId();
+                buffermanager.unpinPage(pid, false);
+                page = null;
+            }
+            pageiterator = null;
         }
 
         @Override
         public void close() {
-            if(page != null){
+            if (page != null){
                 SimplePageId pid = (SimplePageId) page.getId();
                 buffermanager.unpinPage(pid,false);
                 page = null;
                 pageiterator = null;
             }
+            isopen = false;
         }
     }
 

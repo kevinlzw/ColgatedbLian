@@ -94,13 +94,13 @@ public class SlottedPageFormatter {
             DataOutputStream dos = new DataOutputStream(baos);
             // writes header into bytes
             byte[] header = new byte[getHeaderSize(page.getNumSlots())];
-            for(int i = 0; i < page.getNumSlots();i++){
+            for (int i = 0; i < page.getNumSlots();i++){
                 markSlot(i,header,page.isSlotUsed(i));
             }
             dos.write(header);
 
             // writes payload into bytes
-            for(int i = 0; i < page.getNumSlots(); i ++){
+            for (int i = 0; i < page.getNumSlots(); i ++){
                 // the slot is used and writes the data to bytes
                 if(page.isSlotUsed(i)) {
                     Iterator<Field> fieldIterator = page.getTuple(i).fields();
@@ -109,7 +109,7 @@ public class SlottedPageFormatter {
                     }
                 }
                 // the slot is unused and writes 0
-                else{
+                else {
                     byte[] temp = new byte[td.getSize()];
                     dos.write(temp);
                 }
@@ -119,7 +119,6 @@ public class SlottedPageFormatter {
             int extra = pageSize - getHeaderSize(page.getNumSlots()) - td.getSize() * page.getNumSlots();
             byte[] excess = new byte[extra];
             dos.write(excess);
-
             baos.flush();
             return baos.toByteArray();
         } catch (Exception e) {
@@ -138,15 +137,17 @@ public class SlottedPageFormatter {
         try {
             DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
             int headersize = getHeaderSize(emptyPage.getNumSlots());
+
             // writes bytes into page's header
             byte [] header = new byte[headersize];
-            for(int i = 0; i < headersize; i ++){
+            for (int i = 0; i < headersize; i ++){
                 header[i] = dis.readByte();
             }
+
             // writes bytes into page's payload
-            for(int i = 0; i < emptyPage.getNumSlots(); i ++){
+            for (int i = 0; i < emptyPage.getNumSlots(); i ++){
                 Tuple tuple = new Tuple(td);
-                if(isSlotUsed(i,header)) {
+                if (isSlotUsed(i,header)) {
                     for (int j = 0; j < td.numFields(); j++) {
                         Type temp = td.getFieldType(j);
                         Field field = temp.parse(dis);
@@ -155,7 +156,7 @@ public class SlottedPageFormatter {
                     emptyPage.insertTuple(i, tuple);
                 }
                 // skips bytes if the slot is occupied
-                else{
+                else {
                     dis.skipBytes(td.getSize());
                 }
             }
@@ -175,12 +176,9 @@ public class SlottedPageFormatter {
     private static boolean isSlotUsed(int i, byte[] header) {
         int block = i / 8;
         int num = i % 8;
-        // transforms the bytes into String
-        String binary = String.format("%8s", Integer.toBinaryString(header[block] & 0xFF)).replace(' ', '0');
-        // checks if the specific index is occupied
-        char usedslot = binary.charAt(7 - num);
-        int slot = Character.getNumericValue(usedslot);
-        return slot == 1;
+        byte specificblock = header[block];
+        byte temp = (byte) (1 << (num));
+        return ((temp & specificblock) == temp);
     }
 
     /**
@@ -192,12 +190,16 @@ public class SlottedPageFormatter {
     private static void markSlot(int i, byte[] header, boolean isUsed) {
         int block = i / 8;
         int num = i % 8;
-        // transforms the bytes into String
-        String binary = String.format("%8s", Integer.toBinaryString(header[block] & 0xFF)).replace(' ', '0');
-        StringBuilder binarybuilder = new StringBuilder(binary);
-        // marks the slot as occupied or not
-        binarybuilder.setCharAt(7 - num,(isUsed ? '1':'0'));
-        int result = Integer.parseInt(binarybuilder.toString(),2);
-        header[block] = (byte) result;
+        byte specificblock = header[block];
+        // sets the bit
+        if (isUsed){
+            specificblock = (byte) (specificblock | (1 << (num)));
+            header[block] = specificblock;
+        }
+        // clears the bit
+        else {
+            specificblock = (byte) (specificblock & ~(1 << (num)));
+            header[block] = specificblock;
+        }
     }
 }

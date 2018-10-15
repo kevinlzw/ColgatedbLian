@@ -62,6 +62,13 @@ public class SlottedPageMoreTest {
         assertNull(t.getRecordId());
     }
 
+
+    @Test
+    @GradedTest(number="6.1", max_score=1.0, visibility="after_due_date")
+    public void testDelete1() {
+        SlottedPage temp = makePage(2);
+    }
+
     /**
      * Check that a tuple's RecordId is updated after it is inserted into page.
      */
