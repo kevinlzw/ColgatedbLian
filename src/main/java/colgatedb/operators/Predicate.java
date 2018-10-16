@@ -45,21 +45,21 @@ public class Predicate implements Serializable {
      * @return the field number
      */
     public int getField() {
-        throw new UnsupportedOperationException("implement me!");
+        return field;
     }
 
     /**
      * @return the operator
      */
     public Op getOp() {
-        throw new UnsupportedOperationException("implement me!");
+        return op;
     }
 
     /**
      * @return the operand
      */
     public Field getOperand() {
-        throw new UnsupportedOperationException("implement me!");
+        return operand;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Predicate implements Serializable {
      * @return true if the comparison is true, false otherwise.
      */
     public boolean filter(Tuple t) {
-        throw new UnsupportedOperationException("implement me!");
+        return t.getField(field).compare(op,operand);
     }
 
     /**
@@ -80,6 +80,6 @@ public class Predicate implements Serializable {
      * operand_string
      */
     public String toString() {
-        throw new UnsupportedOperationException("implement me!");
+        return "f = field_id op = op_string operand = operand_string";
     }
 }
