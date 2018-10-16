@@ -32,6 +32,7 @@ public class Filter extends Operator {
     private DbIterator child;
     private boolean open;
     private TupleDesc td;
+    private Tuple current;
 
     /**
      * Constructor accepts a predicate to apply and a child operator to read
@@ -71,7 +72,23 @@ public class Filter extends Operator {
 
     @Override
     public boolean hasNext() throws DbException, TransactionAbortedException {
-        return open && child.hasNext();
+        if(!open){
+            return false;
+        }
+        else if(current != null){
+            return true;
+        }
+        else if(!child.hasNext()){
+            return false;
+        }
+        current = child.next();
+        if(p.filter(current)){
+            return true;
+        }
+        else{
+            current = null;
+        }
+        return hasNext();
     }
 
     @Override
@@ -80,14 +97,8 @@ public class Filter extends Operator {
         if (!hasNext()) {
             throw new NoSuchElementException("no more tuples!");
         }
-        Tuple t = child.next();
-        Tuple newTuple = new Tuple(td);
-        newTuple.setRecordId(t.getRecordId());
-        for(int i = 0; i < td.numFields(); i ++){
-            if(p.filter(t)){
-                newTuple.setField(i,t.getField(i));
-            }
-        }
+        Tuple newTuple = current;
+        current = null;
         return newTuple;
     }
 

@@ -59,8 +59,8 @@ public class SeqScan implements DbIterator {
         this.tableAlias = tableAlias;
         file = Database.getCatalog().getDatabaseFile(tableid);
         td = file.getTupleDesc();
-        String[] names= new String[td.getSize()];
-        Type[] types = new Type[td.getSize()];
+        String[] names= new String[td.numFields()];
+        Type[] types = new Type[td.numFields()];
 
         for(int i = 0; i < td.numFields(); i ++){
             String name = td.getFieldName(i);
