@@ -33,7 +33,7 @@ public class OperatorMain {
             throws DbException, TransactionAbortedException, IOException {
 
         // file named college.schema must be in colgatedb directory
-        String filename = "C:\\Users\\kevin\\Documents\\Fall 2018\\CS460\\colgatedb\\src\\main\\java\\colgatedb\\college.schema";
+        String filename = "C:\\Users\\kevin\\Downloads\\lab6 (2).zip\\colgatedb\\college.schema";
         System.out.println("Loading schema from file: " + filename);
         Database.getCatalog().loadSchema(filename);
 

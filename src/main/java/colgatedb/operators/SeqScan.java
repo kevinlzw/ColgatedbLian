@@ -62,7 +62,7 @@ public class SeqScan implements DbIterator {
         String[] names= new String[td.getSize()];
         Type[] types = new Type[td.getSize()];
 
-        for(int i = 0; i < td.getSize(); i ++){
+        for(int i = 0; i < td.numFields(); i ++){
             String name = td.getFieldName(i);
             name = tableAlias + "." + name;
             names[i] = name;
