@@ -27,6 +27,13 @@ import java.util.NoSuchElementException;
  */
 public class Join extends Operator {
 
+    private JoinPredicate p;
+    private DbIterator child1;
+    private DbIterator child2;
+    private boolean open;
+    private Tuple current;
+    private boolean child1hasnext;
+    private Tuple t1;
 
     /**
      * Constructor. Accepts to children to join and the predicate to join them
@@ -37,32 +44,70 @@ public class Join extends Operator {
      * @param child2 Iterator for the right(inner) relation to join
      */
     public Join(JoinPredicate p, DbIterator child1, DbIterator child2) {
-        throw new UnsupportedOperationException("implement me!");
+        this.p = p;
+        this.child1 = child1;
+        this.child2 = child2;
+        TupleDesc newtd = TupleDesc.merge(child1.getTupleDesc(),child2.getTupleDesc());
+        setTupleDesc(newtd);
+        child1hasnext = false;
     }
 
     public JoinPredicate getJoinPredicate() {
-        throw new UnsupportedOperationException("implement me!");
+        return p;
     }
 
     @Override
     public void open() throws DbException, NoSuchElementException,
             TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        child1.open();
+        child2.open();
+        open = true;
     }
 
     @Override
     public void close() {
-        throw new UnsupportedOperationException("implement me!");
+        child1.close();
+        child2.close();
+        open = false;
     }
 
     @Override
     public void rewind() throws DbException, TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        child1.rewind();
+        child2.rewind();
     }
 
     @Override
     public boolean hasNext() throws DbException, TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        if(!open){
+            return false;
+        }
+        if(current != null){
+            return true;
+        }
+        if(!child1hasnext){
+            child1hasnext = child1.hasNext();
+            if(!child1hasnext){
+                return false;
+            }
+            t1 = child1.next();
+        }
+        while(child2.hasNext()){
+            Tuple t2 = child2.next();
+            if(p.filter(t1, t2)){
+                current = new Tuple(this.getTupleDesc());
+                for(int i = 0; i < t1.getTupleDesc().numFields(); i++){
+                    current.setField(i,t1.getField(i));
+                }
+                for(int i = 0; i < t2.getTupleDesc().numFields(); i++){
+                    current.setField(i+t1.getTupleDesc().numFields(),t2.getField(i));
+                }
+                return true;
+            }
+        }
+        child2.rewind();
+        child1hasnext = false;
+        return hasNext();
     }
 
     /**
@@ -85,17 +130,26 @@ public class Join extends Operator {
     @Override
     public Tuple next() throws DbException, TransactionAbortedException,
             NoSuchElementException {
-        throw new UnsupportedOperationException("implement me!");
+        if (!hasNext()) {
+            throw new NoSuchElementException("no more tuples!");
+        }
+        Tuple newTuple = current;
+        current = null;
+        return newTuple;
     }
 
     @Override
     public DbIterator[] getChildren() {
-        throw new UnsupportedOperationException("implement me!");
+        return new DbIterator[]{this.child1, this.child2};
     }
 
     @Override
     public void setChildren(DbIterator[] children) {
-        throw new UnsupportedOperationException("implement me!");
+        if (children.length != 2) {
+            throw new DbException("Expected only two children!");
+        }
+        child1 = children[0];
+        child2 = children[1];
     }
 
 }

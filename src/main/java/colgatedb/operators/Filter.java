@@ -31,7 +31,6 @@ public class Filter extends Operator {
     private Predicate p;
     private DbIterator child;
     private boolean open;
-    private TupleDesc td;
     private Tuple current;
 
     /**
@@ -44,7 +43,7 @@ public class Filter extends Operator {
     public Filter(Predicate p, DbIterator child) {
         this.p = p;
         this.child = child;
-        td = child.getTupleDesc();
+        setTupleDesc(child.getTupleDesc());
         open = false;
     }
 
