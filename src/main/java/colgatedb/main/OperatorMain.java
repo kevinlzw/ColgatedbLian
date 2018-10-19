@@ -12,6 +12,7 @@ import colgatedb.tuple.Type;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * ColgateDB
@@ -44,18 +45,31 @@ public class OperatorMain {
         // - a SeqScan operator on Students at the child of root
         TransactionId tid = new TransactionId();
         SeqScan scanStudents = new SeqScan(tid, Database.getCatalog().getTableId("Students"));
-        StringField alice = new StringField("alice", Type.STRING_LEN);
-        Predicate p = new Predicate(1, Op.EQUALS, alice);
-        DbIterator filterStudents = new Filter(p, scanStudents);
+        SeqScan scanTakes = new SeqScan(tid, Database.getCatalog().getTableId("Takes"));
+        SeqScan scanProfs = new SeqScan(tid, Database.getCatalog().getTableId("Profs"));
+        StringField hay = new StringField("hay", Type.STRING_LEN);
+        Predicate p = new Predicate(1, Op.EQUALS, hay);
+        DbIterator filterresult = new Filter(p, scanProfs);
+        JoinPredicate jp1 = new JoinPredicate(2, Op.EQUALS,1);
+        filterresult = new Join(jp1,filterresult,scanTakes);
+        JoinPredicate jp2 = new JoinPredicate(3, Op.EQUALS,0);
+        filterresult = new Join(jp2,filterresult,scanStudents);
+        ArrayList<Integer> filedname = new ArrayList<Integer>();
+        filedname.add(6);
+        ArrayList<Type> filedtype = new ArrayList<Type>();
+        filedtype.add(Type.STRING_TYPE);
+        filterresult = new Project(filedname,filedtype,filterresult);
+
+
 
         // query execution: we open the iterator of the root and iterate through results
         System.out.println("Query results:");
-        filterStudents.open();
-        while (filterStudents.hasNext()) {
-            Tuple tup = filterStudents.next();
+        filterresult.open();
+        while (filterresult.hasNext()) {
+            Tuple tup = filterresult.next();
             System.out.println("\t"+tup);
         }
-        filterStudents.close();
+        filterresult.close();
 
 
     }

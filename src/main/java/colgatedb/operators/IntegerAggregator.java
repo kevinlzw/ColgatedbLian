@@ -2,9 +2,7 @@ package colgatedb.operators;
 
 import colgatedb.tuple.*;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * ColgateDB
@@ -23,6 +21,14 @@ import java.util.LinkedList;
  */
 public class IntegerAggregator implements Aggregator {
 
+
+    private int gbfield;
+    private Type gbfieldtype;
+    private int afield;
+    private Op what;
+    List<AggregateFields> lists;
+
+
     /**
      * Aggregate constructor
      *
@@ -35,7 +41,11 @@ public class IntegerAggregator implements Aggregator {
      */
 
     public IntegerAggregator(int gbfield, Type gbfieldtype, int afield, Op what) {
-        throw new UnsupportedOperationException("implement me!");
+        this.afield = afield;
+        this.gbfield = gbfield;
+        this.gbfieldtype = gbfieldtype;
+        this.what = what;
+        lists = new ArrayList<>();
     }
 
     /**
@@ -45,7 +55,7 @@ public class IntegerAggregator implements Aggregator {
      * @param tup the Tuple containing an aggregate field and a group-by field
      */
     public void mergeTupleIntoGroup(Tuple tup) {
-        throw new UnsupportedOperationException("implement me!");
+        Field groupby = tup.getField(gbfield);
     }
 
     /**

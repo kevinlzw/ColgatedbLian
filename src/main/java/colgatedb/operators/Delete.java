@@ -1,7 +1,9 @@
 package colgatedb.operators;
 
+import colgatedb.Catalog;
 import colgatedb.Database;
 import colgatedb.DbException;
+import colgatedb.dbfile.DbFile;
 import colgatedb.transactions.TransactionAbortedException;
 import colgatedb.transactions.TransactionId;
 import colgatedb.tuple.IntField;
@@ -32,6 +34,11 @@ import java.util.NoSuchElementException;
  */
 public class Delete extends Operator {
 
+    private DbIterator child;
+    private boolean open;
+    private TupleDesc td;
+    private int firsttime;
+    private TransactionId tid;
 
     /**
      * Constructor specifying the transaction that this delete belongs to as
@@ -41,7 +48,12 @@ public class Delete extends Operator {
      * @param child The child operator from which to read tuples for deletion
      */
     public Delete(TransactionId t, DbIterator child) {
-        throw new UnsupportedOperationException("implement me!");
+        this.child = child;
+        this.open = false;
+        TupleDesc td = new TupleDesc(new Type[]{Type.INT_TYPE}, new String[]{"count"});
+        this.td = td;
+        firsttime = 0;
+        tid = t;
     }
 
     /**
@@ -49,22 +61,24 @@ public class Delete extends Operator {
      */
     @Override
     public TupleDesc getTupleDesc() {
-        throw new UnsupportedOperationException("implement me!");
+        return td;
     }
 
     @Override
     public void open() throws DbException, TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        child.open();
+        open = true;
     }
 
     @Override
     public void close() {
-        throw new UnsupportedOperationException("implement me!");
+        open = false;
+        child.close();
     }
 
     @Override
     public void rewind() throws DbException, TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        child.rewind();
     }
 
     /**
@@ -75,7 +89,8 @@ public class Delete extends Operator {
      */
     @Override
     public boolean hasNext() throws DbException, TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        firsttime ++;
+        return open && firsttime == 1;
     }
 
     /**
@@ -90,17 +105,33 @@ public class Delete extends Operator {
     @Override
     public Tuple next() throws DbException, TransactionAbortedException,
             NoSuchElementException {
-        throw new UnsupportedOperationException("implement me!");
+        if (!hasNext()) {
+            throw new NoSuchElementException("no more tuples!");
+        }
+        int count = 0;
+        while(child.hasNext()){
+            Tuple tuple = child.next();
+            Catalog catalog = Database.getCatalog();
+            DbFile file = catalog.getDatabaseFile(tuple.getRecordId().getPageId().getTableId());
+            file.deleteTuple(tid,tuple);
+            count++;
+        }
+        Tuple tuple = new Tuple(td);
+        tuple.setField(0,new IntField(count));
+        return tuple;
     }
 
     @Override
     public DbIterator[] getChildren() {
-        throw new UnsupportedOperationException("implement me!");
+        return new DbIterator[]{this.child};
     }
 
     @Override
     public void setChildren(DbIterator[] children) {
-        throw new UnsupportedOperationException("implement me!");
+        if (children.length != 1) {
+            throw new DbException("Expected only two children!");
+        }
+        child = children[0];
     }
 
 }

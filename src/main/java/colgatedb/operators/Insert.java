@@ -1,7 +1,9 @@
 package colgatedb.operators;
 
+import colgatedb.Catalog;
 import colgatedb.Database;
 import colgatedb.DbException;
+import colgatedb.dbfile.DbFile;
 import colgatedb.transactions.TransactionAbortedException;
 import colgatedb.transactions.TransactionId;
 import colgatedb.tuple.IntField;
@@ -9,6 +11,7 @@ import colgatedb.tuple.Tuple;
 import colgatedb.tuple.TupleDesc;
 import colgatedb.tuple.Type;
 
+import javax.xml.crypto.Data;
 import java.util.NoSuchElementException;
 
 /**
@@ -33,6 +36,13 @@ import java.util.NoSuchElementException;
 public class Insert extends Operator {
 
 
+    private DbIterator child;
+    private int tableid;
+    private boolean open;
+    private TupleDesc td;
+    private int firsttime;
+    private TransactionId tid;
+
     /**
      * Constructor.
      *
@@ -44,7 +54,13 @@ public class Insert extends Operator {
      */
     public Insert(TransactionId t, DbIterator child, int tableid)
             throws DbException {
-        throw new UnsupportedOperationException("implement me!");
+        this.child = child;
+        this.tableid = tableid;
+        this.open = false;
+        TupleDesc td = new TupleDesc(new Type[]{Type.INT_TYPE}, new String[]{"count"});
+        this.td = td;
+        firsttime = 0;
+        tid = t;
     }
 
     /**
@@ -52,22 +68,24 @@ public class Insert extends Operator {
      */
     @Override
     public TupleDesc getTupleDesc() {
-        throw new UnsupportedOperationException("implement me!");
+        return td;
     }
 
     @Override
     public void open() throws DbException, TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        child.open();
+        open = true;
     }
 
     @Override
     public void close() {
-        throw new UnsupportedOperationException("implement me!");
+        open = false;
+        child.close();
     }
 
     @Override
     public void rewind() throws DbException, TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        child.rewind();
     }
 
     /**
@@ -78,7 +96,8 @@ public class Insert extends Operator {
      */
     @Override
     public boolean hasNext() throws DbException, TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+        firsttime ++;
+        return open && firsttime == 1;
     }
 
     /**
@@ -95,17 +114,32 @@ public class Insert extends Operator {
     @Override
     public Tuple next() throws DbException, TransactionAbortedException,
             NoSuchElementException {
-        throw new UnsupportedOperationException("implement me!");
+        if (!hasNext()) {
+            throw new NoSuchElementException("no more tuples!");
+        }
+        int count = 0;
+        Catalog catalog = Database.getCatalog();
+        DbFile file = catalog.getDatabaseFile(tableid);
+        while(child.hasNext()){
+            file.insertTuple(tid,child.next());
+            count++;
+        }
+        Tuple tuple = new Tuple(td);
+        tuple.setField(0,new IntField(count));
+        return tuple;
     }
 
     @Override
     public DbIterator[] getChildren() {
-        throw new UnsupportedOperationException("implement me!");
+        return new DbIterator[]{this.child};
     }
 
     @Override
     public void setChildren(DbIterator[] children) {
-        throw new UnsupportedOperationException("implement me!");
+        if (children.length != 1) {
+            throw new DbException("Expected only two children!");
+        }
+        child = children[0];
     }
 }
 

@@ -107,7 +107,7 @@ public class Join extends Operator {
         }
         child2.rewind();
         child1hasnext = false;
-        return hasNext();
+        return open && hasNext();
     }
 
     /**

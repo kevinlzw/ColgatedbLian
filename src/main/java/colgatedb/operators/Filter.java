@@ -87,7 +87,7 @@ public class Filter extends Operator {
         else{
             current = null;
         }
-        return hasNext();
+        return open && hasNext();
     }
 
     @Override
