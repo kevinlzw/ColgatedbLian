@@ -38,11 +38,17 @@ public class OperatorMain {
         System.out.println("Loading schema from file: " + filename);
         Database.getCatalog().loadSchema(filename);
 
-        // SQL query: SELECT * FROM STUDENTS WHERE name="Alice"
-        // algebra translation: select_{name="alice"}( Students )
+        /* SELECT S.name
+        FROM Students S, Takes T, Profs P
+        WHERE S.sid = T.sid AND
+        T.cid = P.favoriteCourse AND
+        P.name = "hay"
+        */
         // query plan: a tree with the following structure
-        // - a Filter operator is the root; filter keeps only those w/ name=Alice
-        // - a SeqScan operator on Students at the child of root
+        // - a Filter operator is the root; filter keeps only those w/ name=hay
+        // - a Join operator that joins the Profs table with Takes
+        // - a Join operator that joins the result table with Students
+        // - a Project operator that projects the field out
         TransactionId tid = new TransactionId();
         SeqScan scanStudents = new SeqScan(tid, Database.getCatalog().getTableId("Students"));
         SeqScan scanTakes = new SeqScan(tid, Database.getCatalog().getTableId("Takes"));
@@ -70,8 +76,6 @@ public class OperatorMain {
             System.out.println("\t"+tup);
         }
         filterresult.close();
-
-
     }
 
 }

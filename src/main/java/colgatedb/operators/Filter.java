@@ -74,6 +74,7 @@ public class Filter extends Operator {
         if(!open){
             return false;
         }
+        // next() is not yet called
         else if(current != null){
             return true;
         }
@@ -84,6 +85,7 @@ public class Filter extends Operator {
         if(p.filter(current)){
             return true;
         }
+        // current is not ideal
         else{
             current = null;
         }

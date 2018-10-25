@@ -26,7 +26,7 @@ public class IntegerAggregator implements Aggregator {
     private Type gbfieldtype;
     private int afield;
     private Op what;
-    List<AggregateFields> lists;
+    private HashMap<Field, AggregateFields> lists;
 
 
     /**
@@ -45,7 +45,7 @@ public class IntegerAggregator implements Aggregator {
         this.gbfield = gbfield;
         this.gbfieldtype = gbfieldtype;
         this.what = what;
-        lists = new ArrayList<>();
+        lists = new HashMap<>();
     }
 
     /**
@@ -56,6 +56,29 @@ public class IntegerAggregator implements Aggregator {
      */
     public void mergeTupleIntoGroup(Tuple tup) {
         Field groupby = tup.getField(gbfield);
+        IntField aIntfield = (IntField) tup.getField(afield);
+        int value = aIntfield.getValue();
+        if(lists.get(groupby) != null){
+            AggregateFields aggregatefield = lists.get(groupby);
+            aggregatefield.count ++;
+            if(aggregatefield.max < value){
+                aggregatefield.max = value;
+            }
+            if(aggregatefield.min > value){
+                aggregatefield.min = value;
+            }
+            aggregatefield.sum += value;
+            aggregatefield.sumCount = aggregatefield.sum / aggregatefield.count;
+        }
+        else{
+            AggregateFields aggregate = new AggregateFields(tup.getField(gbfield).toString());
+            aggregate.count = 1;
+            aggregate.min = value;
+            aggregate.max = value;
+            aggregate.sum = value;
+            aggregate.sumCount = aggregate.sum;
+            lists.put(groupby,aggregate);
+        }
     }
 
     /**
@@ -67,7 +90,34 @@ public class IntegerAggregator implements Aggregator {
      * the constructor.
      */
     public DbIterator iterator() {
-        throw new UnsupportedOperationException("implement me!");
+        ArrayList<Tuple> iterable = new ArrayList<>();
+        TupleDesc td = new TupleDesc(new Type[]{gbfieldtype,Type.INT_TYPE});
+        for(Field fieldname: lists.keySet()){
+            AggregateFields temp = lists.get(fieldname);
+            Tuple tuple = new Tuple(td);
+            if(what.equals(Op.COUNT)){
+                tuple.setField(0, fieldname);
+                tuple.setField(1, new IntField(temp.count));
+            }
+            else if(what.equals(Op.MAX)){
+                tuple.setField(0, fieldname);
+                tuple.setField(1, new IntField(temp.max));
+            }
+            else if(what.equals(Op.MIN)){
+                tuple.setField(0, fieldname);
+                tuple.setField(1, new IntField(temp.min));
+            }
+            else if(what.equals(Op.SUM)){
+                tuple.setField(0, fieldname);
+                tuple.setField(1, new IntField(temp.sum));
+            }
+            else if(what.equals(Op.AVG)){
+                tuple.setField(0, fieldname);
+                tuple.setField(1, new IntField(temp.sumCount));
+            }
+            iterable.add(tuple);
+        }
+        return new TupleIterator(td, iterable);
     }
 
     /**

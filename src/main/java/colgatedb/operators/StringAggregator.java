@@ -1,7 +1,9 @@
 package colgatedb.operators;
 
+import colgatedb.page.Page;
 import colgatedb.tuple.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -24,6 +26,12 @@ import java.util.LinkedList;
 public class StringAggregator implements Aggregator {
 
 
+    private int gbfield;
+    private Type gbfieldtype;
+    private int afield;
+    private Op what;
+    private HashMap<Field, AggregateFields> lists;
+
     /**
      * Aggregate constructor
      *
@@ -35,7 +43,11 @@ public class StringAggregator implements Aggregator {
      */
 
     public StringAggregator(int gbfield, Type gbfieldtype, int afield, Op what) {
-        throw new UnsupportedOperationException("implement me!");
+        this.afield = afield;
+        this.gbfield = gbfield;
+        this.gbfieldtype = gbfieldtype;
+        this.what = what;
+        lists = new HashMap<>();
     }
 
     /**
@@ -44,7 +56,16 @@ public class StringAggregator implements Aggregator {
      * @param tup the Tuple containing an aggregate field and a group-by field
      */
     public void mergeTupleIntoGroup(Tuple tup) {
-        throw new UnsupportedOperationException("implement me!");
+        Field groupby = tup.getField(gbfield);
+        if(lists.get(groupby) != null){
+            AggregateFields aggregatefield = lists.get(groupby);
+            aggregatefield.count ++;
+        }
+        else{
+            AggregateFields aggregate = new AggregateFields(tup.getField(gbfield).toString());
+            aggregate.count = 1;
+            lists.put(groupby,aggregate);
+        }
     }
 
     /**
@@ -56,7 +77,28 @@ public class StringAggregator implements Aggregator {
      * aggregate specified in the constructor.
      */
     public DbIterator iterator() {
-        throw new UnsupportedOperationException("implement me!");
+        ArrayList<Tuple> iterable = new ArrayList<>();
+        TupleDesc td;
+        if(gbfieldtype == null) {
+            td = new TupleDesc(new Type[]{Type.INT_TYPE});
+        }
+        else{
+            td = new TupleDesc(new Type[]{gbfieldtype, Type.INT_TYPE});
+        }
+        for(Field fieldname: lists.keySet()){
+            AggregateFields temp = lists.get(fieldname);
+            Tuple tuple = new Tuple(td);
+            IntField intField = new IntField(temp.count);
+            if(gbfieldtype == null) {
+                tuple.setField(0,intField);
+            }
+            else{
+                tuple.setField(0,fieldname);
+                tuple.setField(1,intField);
+            }
+            iterable.add(tuple);
+        }
+        return new TupleIterator(td, iterable);
     }
 
     /**

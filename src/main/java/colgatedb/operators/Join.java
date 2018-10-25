@@ -85,8 +85,10 @@ public class Join extends Operator {
         if(current != null){
             return true;
         }
+        // child1 reaches to the end
         if(!child1hasnext){
             child1hasnext = child1.hasNext();
+            // if no more tuples in child1
             if(!child1hasnext){
                 return false;
             }
@@ -94,6 +96,7 @@ public class Join extends Operator {
         }
         while(child2.hasNext()){
             Tuple t2 = child2.next();
+            // child1's tuple matches child2's tuple
             if(p.filter(t1, t2)){
                 current = new Tuple(this.getTupleDesc());
                 for(int i = 0; i < t1.getTupleDesc().numFields(); i++){
