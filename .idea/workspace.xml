@@ -3,17 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="051dc165-a9b6-49d7-91e7-192a0790e77f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/main/OperatorMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/main/OperatorMain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/operators/Aggregate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/operators/Aggregate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/operators/IntegerAggregator$AggregateFields.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/operators/IntegerAggregator$AggregateFields.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/operators/IntegerAggregator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/operators/IntegerAggregator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/operators/StringAggregator$AggregateFields.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/operators/StringAggregator$AggregateFields.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/operators/StringAggregator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/operators/StringAggregator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/main/OperatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/main/OperatorMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/operators/Aggregate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/operators/Aggregate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/operators/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/operators/Filter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/operators/IntegerAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/operators/IntegerAggregator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/operators/Join.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/operators/Join.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/operators/StringAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/operators/StringAggregator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/operators/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/operators/Filter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/operators/Join.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/operators/Join.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/SynchronizedThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/SynchronizedThreads.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,12 +25,12 @@
     <session id="377818079">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="55" />
+          <entry key="project.closed" value="56" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="7" />
           <entry key="project.open.time.11" value="8" />
           <entry key="project.open.time.12" value="3" />
-          <entry key="project.open.time.13" value="2" />
+          <entry key="project.open.time.13" value="3" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="2" />
@@ -44,29 +38,29 @@
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="14" />
           <entry key="project.open.time.9" value="17" />
-          <entry key="project.opened" value="59" />
+          <entry key="project.opened" value="60" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="14" />
-          <entry key="java" value="311" />
+          <entry key="java" value="319" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="14" />
-          <entry key="JAVA" value="311" />
+          <entry key="JAVA" value="319" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="21891" />
+          <entry key="java" value="21898" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="21891" />
+          <entry key="JAVA" value="21898" />
         </counts>
       </usages-collector>
     </session>
@@ -76,81 +70,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Aggregate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Filter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1200">
-              <caret line="87" column="31" selection-start-line="87" selection-start-column="31" selection-end-line="87" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Join.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1365">
-              <caret line="98" column="52" selection-start-line="98" selection-start-column="52" selection-end-line="98" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/SeqScan.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="111" selection-start-line="111" selection-end-line="111" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Operator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-              <folding>
-                <element signature="e#3108#3109#0" expanded="true" />
-                <element signature="e#3133#3134#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Predicate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-              <folding>
-                <element signature="e#1316#1317#0" expanded="true" />
-                <element signature="e#1344#1345#0" expanded="true" />
-                <element signature="e#1413#1414#0" expanded="true" />
-                <element signature="e#1438#1439#0" expanded="true" />
-                <element signature="e#1514#1515#0" expanded="true" />
-                <element signature="e#1544#1545#0" expanded="true" />
-                <element signature="e#1959#1960#0" expanded="true" />
-                <element signature="e#2019#2020#0" expanded="true" />
-                <element signature="e#2166#2167#0" expanded="true" />
-                <element signature="e#2243#2244#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/main/OperatorMain.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/SynchronizedThreads.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="77" column="29" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
+            <state relative-caret-position="285">
+              <caret line="60" column="28" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -228,6 +152,7 @@
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/operators/Filter.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/operators/Join.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/main/OperatorMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/SynchronizedThreads.java" />
       </list>
     </option>
   </component>
@@ -249,7 +174,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -272,27 +197,6 @@
               <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
-              <item name="operators" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
-              <item name="tuple" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="grader" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -300,6 +204,13 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="tutorials" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tutorials" type="462c0819:PsiDirectoryNode" />
+              <item name="concurrency_tutorial" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
@@ -334,14 +245,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/kevin/Documents/Fall 2018/CS460/colgatedb/src/test/java/colgatedb/page/SimplePageIdTest.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540865233979" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540865521272" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -361,7 +272,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AggregateTest">
+  <component name="RunManager" selected="Application.SynchronizedThreads">
+    <configuration name="SynchronizedThreads" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tutorials.concurrency_tutorial.SynchronizedThreads" />
+      <module name="main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tutorials.concurrency_tutorial.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AggregateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
@@ -420,34 +344,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="colgatedb.operators in test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="colgatedb.operators.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="colgatedb.operators" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="JUnit.colgatedb.operators in test" />
       <item itemvalue="JUnit.IntegerAggregatorTest" />
       <item itemvalue="JUnit.IntegerAggregatorTest.mergeAvg" />
       <item itemvalue="JUnit.StringAggregatorTest" />
       <item itemvalue="JUnit.AggregateTest" />
+      <item itemvalue="Application.SynchronizedThreads" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SynchronizedThreads" />
         <item itemvalue="JUnit.AggregateTest" />
         <item itemvalue="JUnit.StringAggregatorTest" />
         <item itemvalue="JUnit.IntegerAggregatorTest.mergeAvg" />
         <item itemvalue="JUnit.IntegerAggregatorTest" />
-        <item itemvalue="JUnit.colgatedb.operators in test" />
       </list>
     </recent_temporary>
   </component>
@@ -520,6 +430,7 @@
       <workItem from="1540052707118" duration="2516000" />
       <workItem from="1540149636507" duration="9596000" />
       <workItem from="1540468480193" duration="598000" />
+      <workItem from="1540865154237" duration="369000" />
     </task>
     <servers />
   </component>
@@ -556,12 +467,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159938000" />
+    <option name="totallyTimeSpent" value="160307000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.30040485" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.30526316" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -733,7 +644,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/src/main/java/colgatedb/main/OperatorMain.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/page/SlottedPageMoreTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1530">
@@ -1068,28 +978,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Aggregate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
+        <state relative-caret-position="479">
           <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Filter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
+        <state relative-caret-position="479">
           <caret line="87" column="31" selection-start-line="87" selection-start-column="31" selection-end-line="87" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Join.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
+        <state relative-caret-position="479">
           <caret line="98" column="52" selection-start-line="98" selection-start-column="52" selection-end-line="98" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/SeqScan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
+        <state relative-caret-position="479">
           <caret line="111" selection-start-line="111" selection-end-line="111" />
         </state>
       </provider>
@@ -1126,8 +1036,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/main/OperatorMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="77" column="29" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
+        <state relative-caret-position="255">
+          <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/SynchronizedThreads.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="60" column="28" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
         </state>
       </provider>
     </entry>
