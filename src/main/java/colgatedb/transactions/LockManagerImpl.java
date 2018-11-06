@@ -1,5 +1,6 @@
 package colgatedb.transactions;
 
+import colgatedb.page.Page;
 import colgatedb.page.PageId;
 
 import java.util.*;
@@ -20,19 +21,44 @@ import java.util.*;
  */
 public class LockManagerImpl implements LockManager {
 
+    private HashMap<PageId,LockTableEntry> map;
+
 
     public LockManagerImpl() {
-        throw new UnsupportedOperationException("implement me!");
+        map = new HashMap<>();
     }
 
     @Override
-    public void acquireLock(TransactionId tid, PageId pid, Permissions perm) throws TransactionAbortedException {
-        throw new UnsupportedOperationException("implement me!");
+    public synchronized void acquireLock(TransactionId tid, PageId pid, Permissions perm) throws TransactionAbortedException {
+        if(!map.containsKey(pid)){
+            LockTableEntry entry = new LockTableEntry();
+            map.put(pid, entry);
+        }
+        LockTableEntry tableentry = map.get(pid);
+        if(!holdsLock(tid,pid,perm)){
+
+        }
+
     }
 
     @Override
     public synchronized boolean holdsLock(TransactionId tid, PageId pid, Permissions perm) {
-        throw new UnsupportedOperationException("implement me!");
+        LockTableEntry entry = map.get(pid);
+        Permissions permission = entry.getLock(tid);
+        if(permission == null){
+            return false;
+        }
+        else if(permission == Permissions.READ_ONLY){
+            return true;
+        }
+        else{
+            if(perm == permission){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 
     @Override

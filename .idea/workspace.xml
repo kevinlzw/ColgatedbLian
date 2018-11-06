@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="051dc165-a9b6-49d7-91e7-192a0790e77f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/tutorials/concurrency_tutorial/LockManagerDemo$LockManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/tutorials/concurrency_tutorial/LockManagerDemo$LockManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/tutorials/concurrency_tutorial/SynchronizedThreads$Counter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/tutorials/concurrency_tutorial/SynchronizedThreads$Counter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/tutorials/concurrency_tutorial/SynchronizedThreads$Incrementer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/tutorials/concurrency_tutorial/SynchronizedThreads$Incrementer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/tutorials/concurrency_tutorial/ZigZagThreads$LockManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/tutorials/concurrency_tutorial/ZigZagThreads$LockManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/SynchronizedThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/SynchronizedThreads.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/ZigZagThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/ZigZagThreads.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,7 +21,7 @@
     <session id="377818079">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="60" />
+          <entry key="project.closed" value="61" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="8" />
           <entry key="project.open.time.11" value="8" />
@@ -47,23 +41,23 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="14" />
-          <entry key="java" value="324" />
+          <entry key="java" value="329" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="14" />
-          <entry key="JAVA" value="324" />
+          <entry key="JAVA" value="329" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="22214" />
+          <entry key="java" value="23130" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="22214" />
+          <entry key="JAVA" value="23130" />
         </counts>
       </usages-collector>
     </session>
@@ -74,28 +68,62 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/ZigZagThreads.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="68" column="34" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
+            <state>
+              <caret line="25" column="6" lean-forward="true" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="81" column="37" selection-start-line="81" selection-start-column="37" selection-end-line="81" selection-end-column="37" />
+            <state relative-caret-position="225">
+              <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/DiskManagerException.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="225">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
+              <folding>
+                <element signature="e#933#934#0" expanded="true" />
+                <element signature="e#957#958#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/Permissions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="479">
+              <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockManagerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-585">
+              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -177,6 +205,9 @@
         <option value="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/Deadlock.java" />
         <option value="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/ZigZagThreads.java" />
+        <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" />
+        <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java" />
       </list>
     </option>
   </component>
@@ -186,7 +217,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="972" />
     <option name="y" value="16" />
     <option name="width" value="1312" />
@@ -217,6 +248,13 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
+              <item name="transactions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
@@ -257,14 +295,7 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
-              <item name="operators" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
+              <item name="transactions" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -273,10 +304,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/kevin/Documents/Fall 2018/CS460/colgatedb/src/test/java/colgatedb/page/SimplePageIdTest.java" />
+    <property name="SearchEverywhereHistoryKey" value="{&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541529196674" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541535009153" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -296,7 +327,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.LockManagerDemo">
+  <component name="RunManager" selected="Application.ZigZagThreads">
     <configuration name="Deadlock" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="tutorials.concurrency_tutorial.Deadlock" />
       <module name="main" />
@@ -372,8 +403,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LockManagerDemo" />
         <item itemvalue="Application.ZigZagThreads" />
+        <item itemvalue="Application.LockManagerDemo" />
         <item itemvalue="Application.Deadlock" />
         <item itemvalue="Application.SynchronizedThreads" />
         <item itemvalue="JUnit.AggregateTest" />
@@ -454,7 +485,7 @@
       <workItem from="1541042178624" duration="709000" />
       <workItem from="1541090447157" duration="372000" />
       <workItem from="1541465506756" duration="24000" />
-      <workItem from="1541528607546" duration="582000" />
+      <workItem from="1541528607546" duration="6363000" />
     </task>
     <servers />
   </component>
@@ -491,13 +522,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168158000" />
+    <option name="totallyTimeSpent" value="173939000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.33117408" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.33036438" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -515,7 +545,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32740214" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3285968" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32740214" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.32955465" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -528,7 +558,7 @@
       <window_info anchor="right" id="Maven Projects" order="9" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.22105263" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.33036438" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -537,16 +567,16 @@
       <window_info id="Favorites" order="6" sideWeight="0.5008881" side_tool="true" weight="0.29797572" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32740214" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32740214" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3985765" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34875444" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39323843" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3285968" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32740214" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3285968" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32740214" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.32955465" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -669,45 +699,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/src/main/java/colgatedb/operators/TupleIterator.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/page/SlottedPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="211" column="55" selection-start-line="211" selection-start-column="55" selection-end-line="211" selection-end-column="55" />
-          <folding>
-            <element signature="e#3521#3522#0" expanded="true" />
-            <element signature="e#3577#3578#0" expanded="true" />
-            <element signature="e#6895#6896#0" expanded="true" />
-            <element signature="e#6961#6962#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/OrderBy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="116" column="6" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1178">
-          <caret line="97" column="25" selection-start-line="97" selection-start-column="25" selection-end-line="97" selection-end-column="25" />
-          <folding>
-            <element signature="e#3768#3769#0" expanded="true" />
-            <element signature="e#3821#3822#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/dbfile/DbFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="70" column="18" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/OperatorMain.java" />
     <entry file="jar://C:/Program Files/Java/jdk-9.0.1/lib/src.zip!/java.base/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1051,24 +1042,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/DiskManagerException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-585">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/ZigZagThreads.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="68" column="34" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
+        <state relative-caret-position="165">
+          <caret line="50" column="36" lean-forward="true" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="81" column="37" selection-start-line="81" selection-start-column="37" selection-end-line="81" selection-end-column="37" />
+        <state>
+          <caret line="25" column="6" lean-forward="true" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/DiskManagerException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="479">
+          <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/Permissions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#933#934#0" expanded="true" />
+            <element signature="e#957#958#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

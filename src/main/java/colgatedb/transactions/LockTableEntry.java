@@ -1,5 +1,6 @@
 package colgatedb.transactions;
 
+import java.security.Permission;
 import java.util.*;
 
 /**
@@ -25,7 +26,7 @@ public class LockTableEntry {
     // some suggested private instance variables; feel free to modify
     private Permissions lockType;             // null if no one currently has a lock
     private Set<TransactionId> lockHolders;   // a set of txns currently holding a lock on this page
-    private List<LockRequest> requests;       // a queue of outstanding requests
+    private Deque<LockRequest> requests;       // a queue of outstanding requests
 
     public LockTableEntry() {
         lockType = null;
@@ -33,6 +34,32 @@ public class LockTableEntry {
         requests = new LinkedList<>();
         // you may wish to add statements here.
     }
+
+    public boolean acquireLock(TransactionId tid, Permissions lockType){
+        LockRequest lockrequest = new LockRequest(tid, lockType);
+        requests.add(lockrequest);
+        if(requests.getFirst().equals(lockrequest)){
+            this.lockType = lockType;
+            lockHolders.add(tid);
+            requests.removeFirst();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+    public Permissions getLock(TransactionId tid){
+        if(lockHolders.contains(tid)){
+            return lockType;
+        }
+        else{
+            return null;
+        }
+    }
+
+
 
     // you may wish to implement methods here.
 
