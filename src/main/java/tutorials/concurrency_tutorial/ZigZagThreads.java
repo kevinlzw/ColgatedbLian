@@ -46,10 +46,29 @@ public class ZigZagThreads {
 
         public void acquireLock(boolean isZigger) {
             // some code goes here
+            boolean waiting = true;
+            while(waiting){
+                synchronized (this){
+                    if(!inUse && (needZig == isZigger)){
+                        inUse = true;
+                        waiting = false;
+                        needZig = !needZig;
+                    }
+                    if(waiting){
+                        try{
+                            wait();
+                        }
+                        catch (InterruptedException ignored){
+                        }
+                    }
+                }
+            }
         }
 
         public synchronized void releaseLock() {
             // some code goes here
+            inUse = false;
+            notifyAll();
         }
     }}
 
