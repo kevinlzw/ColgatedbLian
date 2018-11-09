@@ -35,10 +35,18 @@ public class LockManagerImpl implements LockManager {
             map.put(pid, entry);
         }
         LockTableEntry tableentry = map.get(pid);
-        if(!holdsLock(tid,pid,perm)){
-
+        if(perm == Permissions.READ_ONLY){
+            if(tableentry.ifEmpty() && !holdsLock(tid, pid, perm)){
+                tableentry.acquireLock(tid,perm);
+                return;
+            }
         }
-
+        else if (perm == Permissions.READ_WRITE){
+            if(tableentry.ifEmpty() && tableentry.ifNoLock()){
+                tableentry.acquireLock(tid,perm);
+                return;
+            }
+        }
     }
 
     @Override
@@ -63,7 +71,11 @@ public class LockManagerImpl implements LockManager {
 
     @Override
     public synchronized void releaseLock(TransactionId tid, PageId pid) {
-        throw new UnsupportedOperationException("implement me!");
+        if(!holdsLock(tid,pid,Permissions.READ_ONLY)){
+            throw new LockManagerException("This transaction does not hold any locks!");
+        }
+        LockTableEntry entry = map.get(pid);
+        entry.releaseLock(tid);
     }
 
     @Override

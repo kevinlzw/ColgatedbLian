@@ -49,6 +49,18 @@ public class LockTableEntry {
         }
     }
 
+    public void releaseLock(TransactionId tid){
+        lockHolders.remove(tid);
+        lockType  = null;
+    }
+
+    public boolean ifEmpty(){
+        return requests.size() == 0;
+    }
+
+    public boolean ifNoLock(){
+        return lockType == null;
+    }
 
     public Permissions getLock(TransactionId tid){
         if(lockHolders.contains(tid)){
