@@ -35,6 +35,14 @@ public class LockTableEntry {
         // you may wish to add statements here.
     }
 
+
+    public List<TransactionId> getLockHolders(){
+        List<TransactionId> list = new ArrayList<>();
+        list.addAll(lockHolders);
+        return list;
+    }
+
+
     public boolean acquireLock(TransactionId tid, Permissions lockType){
         LockRequest lockrequest = new LockRequest(tid, lockType);
         requests.add(lockrequest);

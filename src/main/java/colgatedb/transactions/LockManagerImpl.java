@@ -29,22 +29,35 @@ public class LockManagerImpl implements LockManager {
     }
 
     @Override
-    public synchronized void acquireLock(TransactionId tid, PageId pid, Permissions perm) throws TransactionAbortedException {
-        if(!map.containsKey(pid)){
-            LockTableEntry entry = new LockTableEntry();
-            map.put(pid, entry);
-        }
-        LockTableEntry tableentry = map.get(pid);
-        if(perm == Permissions.READ_ONLY){
-            if(tableentry.ifEmpty() && !holdsLock(tid, pid, perm)){
-                tableentry.acquireLock(tid,perm);
-                return;
-            }
-        }
-        else if (perm == Permissions.READ_WRITE){
-            if(tableentry.ifEmpty() && tableentry.ifNoLock()){
-                tableentry.acquireLock(tid,perm);
-                return;
+    public void acquireLock(TransactionId tid, PageId pid, Permissions perm) throws TransactionAbortedException {
+        boolean waiting = true;
+        while (waiting) {
+            synchronized (this) {
+                if (!map.containsKey(pid)) {
+                    LockTableEntry entry = new LockTableEntry();
+                    map.put(pid, entry);
+                }
+                LockTableEntry tableentry = map.get(pid);
+                if (perm == Permissions.READ_ONLY) {
+                    if (tableentry.ifEmpty() && !holdsLock(tid, pid, perm)) {
+                        tableentry.acquireLock(tid, perm);
+                        return;
+                    }
+                }
+                else if (perm == Permissions.READ_WRITE) {
+                    if (tableentry.ifEmpty() && tableentry.ifNoLock()) {
+                        tableentry.acquireLock(tid, perm);
+                        return;
+                    }
+                }
+                if(waiting){
+                    try{
+                        wait();
+                    }
+                    catch (InterruptedException ignored){
+                    }
+                }
+
             }
         }
     }
@@ -52,11 +65,14 @@ public class LockManagerImpl implements LockManager {
     @Override
     public synchronized boolean holdsLock(TransactionId tid, PageId pid, Permissions perm) {
         LockTableEntry entry = map.get(pid);
+        if(entry == null){
+            return false;
+        }
         Permissions permission = entry.getLock(tid);
         if(permission == null){
             return false;
         }
-        else if(permission == Permissions.READ_ONLY){
+        else if(perm == Permissions.READ_ONLY){
             return true;
         }
         else{
@@ -76,15 +92,24 @@ public class LockManagerImpl implements LockManager {
         }
         LockTableEntry entry = map.get(pid);
         entry.releaseLock(tid);
+        notifyAll();
     }
 
     @Override
     public synchronized List<PageId> getPagesForTid(TransactionId tid) {
-        throw new UnsupportedOperationException("implement me!");
+        ArrayList<PageId> lockedpage = new ArrayList<>();
+        for(PageId pid: map.keySet()){
+            LockTableEntry lte = map.get(pid);
+            if(holdsLock(tid,pid,Permissions.READ_ONLY)){
+                lockedpage.add(pid);
+            }
+        }
+        return lockedpage;
     }
 
     @Override
     public synchronized List<TransactionId> getTidsForPage(PageId pid) {
-        throw new UnsupportedOperationException("implement me!");
+        LockTableEntry lte = map.get(pid);
+        return lte.getLockHolders();
     }
 }
