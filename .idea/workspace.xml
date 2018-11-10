@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="051dc165-a9b6-49d7-91e7-192a0790e77f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockScheduleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockScheduleTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,30 +36,30 @@
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="16" />
-          <entry key="project.open.time.9" value="20" />
-          <entry key="project.opened" value="68" />
+          <entry key="project.open.time.9" value="21" />
+          <entry key="project.opened" value="69" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="15" />
-          <entry key="java" value="334" />
+          <entry key="java" value="341" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="15" />
-          <entry key="JAVA" value="334" />
+          <entry key="JAVA" value="341" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="24081" />
+          <entry key="java" value="24851" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="24081" />
+          <entry key="JAVA" value="24851" />
         </counts>
       </usages-collector>
     </session>
@@ -67,29 +69,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-241">
-              <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+            <state relative-caret-position="-1">
+              <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="47">
+              <caret line="57" column="92" lean-forward="true" selection-start-line="57" selection-start-column="92" selection-end-line="57" selection-end-column="92" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="69" column="45" lean-forward="true" selection-start-line="69" selection-start-column="45" selection-end-line="69" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3256#3257#0" expanded="true" />
+                <element signature="e#3299#3300#0" expanded="true" />
+                <element signature="e#3331#3332#0" expanded="true" />
+                <element signature="e#3370#3371#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockScheduleTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="60" column="44" lean-forward="true" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+            <state relative-caret-position="209">
+              <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/ConcurrencyControlTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/Schedule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state relative-caret-position="134">
+              <caret line="196" column="32" lean-forward="true" selection-start-line="196" selection-start-column="32" selection-end-line="196" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -98,21 +125,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="91" column="33" lean-forward="true" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="72" column="23" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1977#1978#0" expanded="true" />
-                <element signature="e#2020#2021#0" expanded="true" />
-              </folding>
+              <caret line="91" column="33" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -197,8 +210,9 @@
         <option value="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/ZigZagThreads.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" />
+        <option value="$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockScheduleTest.java" />
       </list>
     </option>
   </component>
@@ -208,7 +222,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="972" />
     <option name="y" value="16" />
     <option name="width" value="1312" />
@@ -220,6 +234,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -290,15 +306,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="{&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541777521685" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541827259427" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -318,20 +332,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.LockScheduleTest">
-    <configuration name="ZigZagThreads" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="tutorials.concurrency_tutorial.ZigZagThreads" />
-      <module name="main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tutorials.concurrency_tutorial.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.LockScheduleTest.upgradeRequestCutsInLine2">
     <configuration name="ConcurrencyControlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
@@ -390,20 +391,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="colgatedb.transactions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="colgatedb.transactions" />
+      <option name="MAIN_CLASS_NAME" value="colgatedb.transactions.LockScheduleTest" />
+      <option name="METHOD_NAME" value="upgradeRequestCutsInLine2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.ZigZagThreads" />
       <item itemvalue="JUnit.LockManagerTest" />
       <item itemvalue="JUnit.LockManagerTest.holdsLock" />
       <item itemvalue="JUnit.ConcurrencyControlTest" />
       <item itemvalue="JUnit.LockScheduleTest" />
+      <item itemvalue="JUnit.LockScheduleTest.upgradeRequestCutsInLine2" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.LockScheduleTest.upgradeRequestCutsInLine2" />
         <item itemvalue="JUnit.LockScheduleTest" />
         <item itemvalue="JUnit.ConcurrencyControlTest" />
         <item itemvalue="JUnit.LockManagerTest" />
         <item itemvalue="JUnit.LockManagerTest.holdsLock" />
-        <item itemvalue="Application.ZigZagThreads" />
       </list>
     </recent_temporary>
   </component>
@@ -485,48 +502,50 @@
       <workItem from="1541622733217" duration="891000" />
       <workItem from="1541737701543" duration="2211000" />
       <workItem from="1541774616520" duration="3159000" />
+      <workItem from="1541817828564" duration="6643000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AggregateTest - 2018.10.21 at 17h 17m 14s.xml">
-      <configuration name="AggregateTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LockManagerTest - 2018.11.09 at 09h 45m 24s.xml">
-      <configuration name="LockManagerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LockManagerTest - 2018.11.09 at 10h 02m 43s.xml">
-      <configuration name="LockManagerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LockManagerTest - 2018.11.09 at 10h 10m 57s.xml">
-      <configuration name="LockManagerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LockManagerTest_holdsLock - 2018.11.09 at 10h 12m 21s.xml">
-      <configuration name="LockManagerTest.holdsLock" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LockManagerTest_holdsLock - 2018.11.09 at 10h 13m 03s.xml">
-      <configuration name="LockManagerTest.holdsLock" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LockManagerTest - 2018.11.09 at 10h 14m 05s.xml">
-      <configuration name="LockManagerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ConcurrencyControlTest - 2018.11.09 at 10h 14m 22s.xml">
+    <history-entry file="ConcurrencyControlTest - 2018.11.09 at 23h 45m 15s.xml">
       <configuration name="ConcurrencyControlTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ConcurrencyControlTest - 2018.11.09 at 10h 26m 34s.xml">
-      <configuration name="ConcurrencyControlTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LockScheduleTest - 2018.11.09 at 10h 30m 29s.xml">
+    <history-entry file="LockScheduleTest - 2018.11.09 at 23h 45m 24s.xml">
       <configuration name="LockScheduleTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine2 - 2018.11.09 at 23h 54m 37s.xml">
+      <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine2 - 2018.11.09 at 23h 56m 30s.xml">
+      <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine2 - 2018.11.10 at 00h 02m 45s.xml">
+      <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine2 - 2018.11.10 at 00h 02m 47s.xml">
+      <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine2 - 2018.11.10 at 00h 09m 01s.xml">
+      <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine2 - 2018.11.10 at 00h 13m 20s.xml">
+      <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine2 - 2018.11.10 at 00h 14m 21s.xml">
+      <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine2 - 2018.11.10 at 00h 19m 06s.xml">
+      <configuration name="LockScheduleTest.upgradeRequestCutsInLine2" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="180200000" />
+    <option name="totallyTimeSpent" value="186843000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.25668016" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.26072875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -535,7 +554,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.5008881" side_tool="true" weight="0.29797572" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32740214" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.34875444" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34875444" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39323843" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -704,27 +723,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/operators/JoinPredicateTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.1/lib/src.zip!/java.base/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="895" selection-start-line="895" selection-end-line="895" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/operators/JoinTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2430">
-          <caret line="172" column="8" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/tuple/StringField.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1053,70 +1051,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="72" column="23" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1977#1978#0" expanded="true" />
-            <element signature="e#2020#2021#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/junit-4.12.jar!/org/junit/Assert.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#718#719#0" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-            <element signature="e#822#823#0" expanded="true" />
-            <element signature="e#874#875#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-271">
-          <caret line="32" column="3" lean-forward="true" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/LockManagerDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="91" column="33" lean-forward="true" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="61" />
+          <caret line="91" column="33" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="32" column="3" lean-forward="true" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/ConcurrencyControlTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
+        <state relative-caret-position="270">
           <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java">
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.1/lib/src.zip!/java.base/java/lang/Throwable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        <state relative-caret-position="104">
+          <caret line="646" column="16" selection-start-line="646" selection-start-column="16" selection-end-line="646" selection-end-column="16" />
+          <folding>
+            <element signature="e#26290#26291#0" expanded="true" />
+            <element signature="e#26333#26334#0" expanded="true" />
+            <element signature="e#26538#26539#0" expanded="true" />
+            <element signature="e#26596#26597#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockScheduleTest.java">
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.1/lib/src.zip!/java.base/java/lang/Thread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="60" column="44" lean-forward="true" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+        <state relative-caret-position="15">
+          <caret line="794" column="29" selection-start-line="794" selection-start-column="29" selection-end-line="794" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="69" column="45" lean-forward="true" selection-start-line="69" selection-start-column="45" selection-end-line="69" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3256#3257#0" expanded="true" />
+            <element signature="e#3299#3300#0" expanded="true" />
+            <element signature="e#3331#3332#0" expanded="true" />
+            <element signature="e#3370#3371#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/Schedule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="196" column="32" lean-forward="true" selection-start-line="196" selection-start-column="32" selection-end-line="196" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-241">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+        <state relative-caret-position="-1">
+          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="57" column="92" lean-forward="true" selection-start-line="57" selection-start-column="92" selection-end-line="57" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockScheduleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
         </state>
       </provider>
     </entry>

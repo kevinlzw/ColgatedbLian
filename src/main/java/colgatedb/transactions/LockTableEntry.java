@@ -43,23 +43,51 @@ public class LockTableEntry {
     }
 
 
-    public boolean acquireLock(TransactionId tid, Permissions lockType){
+    public LockRequest addRequests(TransactionId tid, Permissions lockType){
         LockRequest lockrequest = new LockRequest(tid, lockType);
+        if(requests.contains(lockrequest)){
+            return lockrequest;
+        }
         requests.add(lockrequest);
-        if(requests.getFirst().equals(lockrequest)){
-            this.lockType = lockType;
-            lockHolders.add(tid);
-            requests.removeFirst();
-            return true;
+        return lockrequest;
+    }
+
+    public boolean acquireLock(LockRequest lockrequest, TransactionId tid){
+        if(lockrequest.perm == Permissions.READ_ONLY){
+            if(requests.getFirst().equals(lockrequest) && lockType != Permissions.READ_WRITE){
+                this.lockType = Permissions.READ_ONLY;
+                lockHolders.add(tid);
+                requests.removeFirst();
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        else{
-            return false;
+        else if(lockrequest.perm == Permissions.READ_WRITE){
+            if(lockHolders.contains(tid) && lockType == Permissions.READ_ONLY && lockHolders.size() == 1){
+                this.lockType = Permissions.READ_WRITE;
+                requests.remove(lockrequest);
+                return true;
+            }
+            if(requests.getFirst().equals(lockrequest) && lockType == null){
+                this.lockType = Permissions.READ_WRITE;
+                lockHolders.add(tid);
+                requests.removeFirst();
+                return true;
+            }
+            else{
+                return false;
+            }
         }
+        return false;
     }
 
     public void releaseLock(TransactionId tid){
         lockHolders.remove(tid);
-        lockType  = null;
+        if(lockHolders.size() == 0){
+            lockType  = null;
+        }
     }
 
     public boolean ifEmpty(){
@@ -87,7 +115,7 @@ public class LockTableEntry {
      * A class representing a single lock request.  Simply tracks the txn and the desired lock type.
      * Feel free to use this, modify it, or not use it at all.
      */
-    private class LockRequest {
+    public class LockRequest {
         public final TransactionId tid;
         public final Permissions perm;
 

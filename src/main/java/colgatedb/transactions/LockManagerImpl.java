@@ -38,17 +38,9 @@ public class LockManagerImpl implements LockManager {
                     map.put(pid, entry);
                 }
                 LockTableEntry tableentry = map.get(pid);
-                if (perm == Permissions.READ_ONLY) {
-                    if (tableentry.ifEmpty() && !holdsLock(tid, pid, perm)) {
-                        tableentry.acquireLock(tid, perm);
-                        return;
-                    }
-                }
-                else if (perm == Permissions.READ_WRITE) {
-                    if (tableentry.ifEmpty() && tableentry.ifNoLock()) {
-                        tableentry.acquireLock(tid, perm);
-                        return;
-                    }
+                LockTableEntry.LockRequest lockrequest =  tableentry.addRequests(tid,perm);
+                if(tableentry.acquireLock(lockrequest, tid)){
+                    waiting = false;
                 }
                 if(waiting){
                     try{

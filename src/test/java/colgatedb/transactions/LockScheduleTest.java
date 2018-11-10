@@ -73,6 +73,31 @@ public class LockScheduleTest {
 
     // write three unit tests here
 
+    /**
+     * Tricky test case:
+     * - T1, T2 have shared lock and T1 is waiting on a upgrade to exclusive
+     * - then T3 requests shared lock, T1 should be granted after T2 unlocked to prevent starvation
+     */
+    @Test
+    @GradedTest(number="19.2", max_score=1.0, visibility="visible")
+    public void upgradeRequestCutsInLine2() {
+        steps = new Schedule.Step[]{
+                new Schedule.Step(tid1, pid1, Schedule.Action.SHARED),     // t2 requests shared
+                new Schedule.Step(tid1, pid1, Schedule.Action.ACQUIRED),    // t2 got the lock
+                new Schedule.Step(tid0, pid1, Schedule.Action.SHARED),     // t1 requests shared
+                new Schedule.Step(tid0, pid1, Schedule.Action.ACQUIRED),    // t1 got the lock
+                new Schedule.Step(tid0, pid1, Schedule.Action.EXCLUSIVE),     // t1 requests upgrade
+                new Schedule.Step(tid2, pid1, Schedule.Action.SHARED),     // t3 requests shared
+                new Schedule.Step(tid1, pid1, Schedule.Action.UNLOCK),     // t2 unlocked
+                new Schedule.Step(tid0, pid1, Schedule.Action.ACQUIRED),   // t1 got the lock
+                new Schedule.Step(tid0, pid1, Schedule.Action.UNLOCK),     // t1 unlocked
+                new Schedule.Step(tid2, pid1, Schedule.Action.ACQUIRED)   // t3 got the lock
+        };
+        executeSchedule();
+    }
+
+
+
     private void executeSchedule() {
         try {
             schedule = new Schedule(steps, lm);
