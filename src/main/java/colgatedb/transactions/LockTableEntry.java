@@ -27,12 +27,14 @@ public class LockTableEntry {
     private Permissions lockType;             // null if no one currently has a lock
     private Set<TransactionId> lockHolders;   // a set of txns currently holding a lock on this page
     private Deque<LockRequest> requests;       // a queue of outstanding requests
+    private int exclusiveinqueue;
 
     public LockTableEntry() {
         lockType = null;
         lockHolders = new HashSet<>();
         requests = new LinkedList<>();
         // you may wish to add statements here.
+        exclusiveinqueue = 0;
     }
 
 
@@ -51,6 +53,9 @@ public class LockTableEntry {
         if(requests.contains(lockrequest)){
             return lockrequest;
         }
+        if(lockType == Permissions.READ_WRITE){
+            exclusiveinqueue ++;
+        }
         if(lockHolders.contains(tid) && lockType == Permissions.READ_WRITE){
             requests.addFirst(lockrequest);
             return lockrequest;
@@ -61,7 +66,7 @@ public class LockTableEntry {
 
     public boolean acquireLock(LockRequest lockrequest, TransactionId tid){
         if(lockrequest.perm == Permissions.READ_ONLY){
-            if(requests.contains(lockrequest) && lockType != Permissions.READ_WRITE){
+            if(requests.contains(lockrequest) && lockType != Permissions.READ_WRITE && exclusiveinqueue == 0){
                 this.lockType = Permissions.READ_ONLY;
                 lockHolders.add(tid);
                 requests.remove(lockrequest);
@@ -86,6 +91,9 @@ public class LockTableEntry {
     }
 
     public void releaseLock(TransactionId tid){
+        if(lockType == Permissions.READ_WRITE && lockHolders.contains(tid)){
+            exclusiveinqueue --;
+        }
         lockHolders.remove(tid);
         if(lockHolders.size() == 0){
             lockType = null;
