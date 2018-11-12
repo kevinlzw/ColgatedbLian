@@ -97,6 +97,53 @@ public class LockScheduleTest {
     }
 
 
+    /**
+     * Test case:
+     * - T1 has shared lock on pid1, 2 and T2, T3 are waiting on exclusive locks
+     * - then T1 unlocked pid1, 2,T2 and T3 should be granted after T1 unlocked
+     */
+    @Test
+    @GradedTest(number="19.2", max_score=1.0, visibility="visible")
+    public void twoDifferentPages() {
+        steps = new Schedule.Step[]{
+                new Schedule.Step(tid0, pid1, Schedule.Action.SHARED),     // t1 requests shared pid1
+                new Schedule.Step(tid0, pid1, Schedule.Action.ACQUIRED),     // t1 got lock for pid1
+                new Schedule.Step(tid0, pid2, Schedule.Action.SHARED),     // t1 requests shared pid2
+                new Schedule.Step(tid0, pid2, Schedule.Action.ACQUIRED),     // t1 got lock for pid2
+                new Schedule.Step(tid1, pid1, Schedule.Action.EXCLUSIVE),     // t2 requests exclusive pid1
+                new Schedule.Step(tid2, pid2, Schedule.Action.EXCLUSIVE),     // t3 requests exclusive pid2
+                new Schedule.Step(tid0, pid1, Schedule.Action.UNLOCK),     // t1 unlocked pid1
+                new Schedule.Step(tid1, pid1, Schedule.Action.ACQUIRED),     // t2 got lock for pid1
+                new Schedule.Step(tid0, pid2, Schedule.Action.UNLOCK),     // t1 unlocked pid2
+                new Schedule.Step(tid2, pid2, Schedule.Action.ACQUIRED),     // t3 got lock for pid2
+        };
+        executeSchedule();
+    }
+
+
+    /**
+     * Tricky test case:
+     * - T1, T2 have shared lock and T3 is waiting on an exclusive lock
+     * - then T1 requests a upgrade, T1 should be granted after T2 unlocked
+     */
+    @Test
+    @GradedTest(number="19.2", max_score=1.0, visibility="visible")
+    public void upgradeRequestCutsInLine3() {
+        steps = new Schedule.Step[]{
+                new Schedule.Step(tid1, pid1, Schedule.Action.SHARED),     // t2 requests shared
+                new Schedule.Step(tid1, pid1, Schedule.Action.ACQUIRED),    // t2 got the lock
+                new Schedule.Step(tid0, pid1, Schedule.Action.SHARED),     // t1 requests shared
+                new Schedule.Step(tid0, pid1, Schedule.Action.ACQUIRED),    // t1 got the lock
+                new Schedule.Step(tid2, pid1, Schedule.Action.EXCLUSIVE),     // t3 requests the exclusive lock
+                new Schedule.Step(tid0, pid1, Schedule.Action.EXCLUSIVE),     // t1 requests upgrade
+                new Schedule.Step(tid1, pid1, Schedule.Action.UNLOCK),     // t2 unlocked
+                new Schedule.Step(tid0, pid1, Schedule.Action.ACQUIRED),   // t1 got the lock
+                new Schedule.Step(tid0, pid1, Schedule.Action.UNLOCK),     // t1 unlocked
+                new Schedule.Step(tid2, pid1, Schedule.Action.ACQUIRED)   // t3 got the lock
+        };
+        executeSchedule();
+    }
+
 
     private void executeSchedule() {
         try {

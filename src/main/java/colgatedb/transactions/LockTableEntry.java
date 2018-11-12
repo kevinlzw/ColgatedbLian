@@ -45,7 +45,14 @@ public class LockTableEntry {
 
     public LockRequest addRequests(TransactionId tid, Permissions lockType){
         LockRequest lockrequest = new LockRequest(tid, lockType);
+        if(lockHolders.contains(tid) && this.lockType == lockType){
+            throw new LockManagerException("You have already acquired the lock!");
+        }
         if(requests.contains(lockrequest)){
+            return lockrequest;
+        }
+        if(lockHolders.contains(tid) && lockType == Permissions.READ_WRITE){
+            requests.addFirst(lockrequest);
             return lockrequest;
         }
         requests.add(lockrequest);
@@ -54,23 +61,19 @@ public class LockTableEntry {
 
     public boolean acquireLock(LockRequest lockrequest, TransactionId tid){
         if(lockrequest.perm == Permissions.READ_ONLY){
-            if(requests.getFirst().equals(lockrequest) && lockType != Permissions.READ_WRITE){
+            if(requests.contains(lockrequest) && lockType != Permissions.READ_WRITE){
                 this.lockType = Permissions.READ_ONLY;
                 lockHolders.add(tid);
-                requests.removeFirst();
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else if(lockrequest.perm == Permissions.READ_WRITE){
-            if(lockHolders.contains(tid) && lockType == Permissions.READ_ONLY && lockHolders.size() == 1){
-                this.lockType = Permissions.READ_WRITE;
                 requests.remove(lockrequest);
                 return true;
             }
-            if(requests.getFirst().equals(lockrequest) && lockType == null){
+            else{
+                return false;
+            }
+        }
+        // lockrequest.perm == Permissions.READ_WRITE
+        else{
+            if(requests.getFirst().equals(lockrequest) && (lockType == null || (lockHolders.size() == 1 && lockHolders.contains(tid)))){
                 this.lockType = Permissions.READ_WRITE;
                 lockHolders.add(tid);
                 requests.removeFirst();
@@ -80,13 +83,12 @@ public class LockTableEntry {
                 return false;
             }
         }
-        return false;
     }
 
     public void releaseLock(TransactionId tid){
         lockHolders.remove(tid);
         if(lockHolders.size() == 0){
-            lockType  = null;
+            lockType = null;
         }
     }
 

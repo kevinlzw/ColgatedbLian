@@ -22,14 +22,21 @@ import java.util.*;
 public class LockManagerImpl implements LockManager {
 
     private HashMap<PageId,LockTableEntry> map;
-
+    private HashMap<TransactionId, Boolean> lockpoint;
 
     public LockManagerImpl() {
         map = new HashMap<>();
+        lockpoint = new HashMap<>();
     }
 
     @Override
     public void acquireLock(TransactionId tid, PageId pid, Permissions perm) throws TransactionAbortedException {
+        if(!lockpoint.containsKey(tid)){
+            lockpoint.put(tid, false);
+        }
+        if(lockpoint.get(tid)){
+            throw new LockManagerException("You cannot acquire any new locks after you released some locks!");
+        }
         boolean waiting = true;
         while (waiting) {
             synchronized (this) {
@@ -84,6 +91,7 @@ public class LockManagerImpl implements LockManager {
         }
         LockTableEntry entry = map.get(pid);
         entry.releaseLock(tid);
+        lockpoint.put(tid, true);
         notifyAll();
     }
 
