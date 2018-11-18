@@ -64,7 +64,7 @@ public class LockTableEntry {
         return lockrequest;
     }
 
-    public boolean acquireLock(LockRequest lockrequest, TransactionId tid){
+    public boolean acquireLock(LockRequest lockrequest, TransactionId tid, LockManagerImpl.Node node){
         if(lockrequest.perm == Permissions.READ_ONLY){
             if(requests.contains(lockrequest) && lockType != Permissions.READ_WRITE && exclusiveinqueue == 0){
                 this.lockType = Permissions.READ_ONLY;
@@ -73,6 +73,9 @@ public class LockTableEntry {
                 return true;
             }
             else{
+                if(lockType == Permissions.READ_WRITE){
+                    node.waitfor.addAll(lockHolders);
+                }
                 return false;
             }
         }
@@ -85,6 +88,9 @@ public class LockTableEntry {
                 return true;
             }
             else{
+                if(lockType == Permissions.READ_WRITE){
+                    node.waitfor.addAll(lockHolders);
+                }
                 return false;
             }
         }

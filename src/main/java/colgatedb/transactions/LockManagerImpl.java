@@ -22,21 +22,19 @@ import java.util.*;
 public class LockManagerImpl implements LockManager {
 
     private HashMap<PageId,LockTableEntry> map;
-    private HashMap<TransactionId, Boolean> lockpoint;
+
+    private HashMap<TransactionId, Node> nodes;
+
+    private int tidorder;
 
     public LockManagerImpl() {
         map = new HashMap<>();
-        lockpoint = new HashMap<>();
+        nodes = new HashMap<>();
+        tidorder = 0;
     }
 
     @Override
     public void acquireLock(TransactionId tid, PageId pid, Permissions perm) throws TransactionAbortedException {
-        if(!lockpoint.containsKey(tid)){
-            lockpoint.put(tid, false);
-        }
-        if(lockpoint.get(tid)){
-            throw new LockManagerException("You cannot acquire any new locks after you released some locks!");
-        }
         boolean waiting = true;
         while (waiting) {
             synchronized (this) {
@@ -44,10 +42,33 @@ public class LockManagerImpl implements LockManager {
                     LockTableEntry entry = new LockTableEntry();
                     map.put(pid, entry);
                 }
+                if(!nodes.containsKey(tid)){
+                    tidorder ++;
+                    Node node = new Node(tidorder);
+                    nodes.put(tid,node);
+                }
                 LockTableEntry tableentry = map.get(pid);
+                nodes.get(tid).waitfor.addAll(tableentry.getLockHolders());
+                nodes.get(tid).waitfor.remove(tid);
+                for(TransactionId alltid: nodes.keySet()){
+                    Node temp = nodes.get(alltid);
+                    temp.ifexisted = "no";
+                }
+                if(deadLockDetection(tid)){ 
+                    Node currenttid = nodes.get(tid);
+                    for(TransactionId lockholder: tableentry.getLockHolders()){
+                        Node node = nodes.get(lockholder);
+                        if(currenttid.myorder > node.myorder){
+                            throw new TransactionAbortedException();
+                        }
+                    }
+                }
                 LockTableEntry.LockRequest lockrequest =  tableentry.addRequests(tid,perm);
-                if(tableentry.acquireLock(lockrequest, tid)){
+                if(tableentry.acquireLock(lockrequest, tid, nodes.get(tid))){
                     waiting = false;
+                    for(TransactionId alltid: nodes.keySet()){
+                        nodes.get(alltid).waitfor.remove(tid);
+                    }
                 }
                 if(waiting){
                     try{
@@ -56,7 +77,6 @@ public class LockManagerImpl implements LockManager {
                     catch (InterruptedException ignored){
                     }
                 }
-
             }
         }
     }
@@ -75,12 +95,7 @@ public class LockManagerImpl implements LockManager {
             return true;
         }
         else{
-            if(perm == permission){
-                return true;
-            }
-            else{
-                return false;
-            }
+            return perm == permission;
         }
     }
 
@@ -91,7 +106,9 @@ public class LockManagerImpl implements LockManager {
         }
         LockTableEntry entry = map.get(pid);
         entry.releaseLock(tid);
-        lockpoint.put(tid, true);
+        for(TransactionId alltid: nodes.keySet()){
+            nodes.get(alltid).waitfor.remove(tid);
+        }
         notifyAll();
     }
 
@@ -112,4 +129,47 @@ public class LockManagerImpl implements LockManager {
         LockTableEntry lte = map.get(pid);
         return lte.getLockHolders();
     }
+
+    public synchronized boolean deadLockDetection(TransactionId tid){
+        Node node = nodes.get(tid);
+        if(node.ifexisted.equals("finished")){
+            return true;
+        }
+        if(node.waitfor.isEmpty()){
+            return false;
+        }
+        node.ifexisted = "searching";
+        for(TransactionId child: node.waitfor){
+            Node childnode = nodes.get(child);
+            if(childnode.ifexisted.equals("searching")){
+                return true;
+            }
+            if(deadLockDetection(child)){
+                return true;
+            }
+        }
+        node.ifexisted = "finished";
+        return false;
+    }
+
+
+
+    public class Node{
+
+        public int myorder;
+
+        public String ifexisted;
+
+        public HashSet<TransactionId> waitfor;
+
+        public Node(int tidorder){
+            waitfor = new HashSet<>();
+            ifexisted = "no";
+            myorder = tidorder;
+        }
+    }
+
+
+
+
 }

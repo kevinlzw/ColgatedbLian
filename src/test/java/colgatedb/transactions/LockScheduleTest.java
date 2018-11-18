@@ -79,7 +79,6 @@ public class LockScheduleTest {
      * - then T3 requests shared lock, T1 should be granted after T2 unlocked to prevent starvation
      */
     @Test
-    @GradedTest(number="19.2", max_score=1.0, visibility="visible")
     public void upgradeRequestCutsInLine2() {
         steps = new Schedule.Step[]{
                 new Schedule.Step(tid1, pid1, Schedule.Action.SHARED),     // t2 requests shared
@@ -103,7 +102,6 @@ public class LockScheduleTest {
      * - then T1 unlocked pid1, 2,T2 and T3 should be granted after T1 unlocked
      */
     @Test
-    @GradedTest(number="19.2", max_score=1.0, visibility="visible")
     public void twoDifferentPages() {
         steps = new Schedule.Step[]{
                 new Schedule.Step(tid0, pid1, Schedule.Action.SHARED),     // t1 requests shared pid1
@@ -127,7 +125,6 @@ public class LockScheduleTest {
      * - then T1 requests a upgrade, T1 should be granted after T2 unlocked
      */
     @Test
-    @GradedTest(number="19.2", max_score=1.0, visibility="visible")
     public void upgradeRequestCutsInLine3() {
         steps = new Schedule.Step[]{
                 new Schedule.Step(tid1, pid1, Schedule.Action.SHARED),     // t2 requests shared
