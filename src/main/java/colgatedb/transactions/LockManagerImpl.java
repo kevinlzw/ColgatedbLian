@@ -23,14 +23,11 @@ public class LockManagerImpl implements LockManager {
 
     private HashMap<PageId,LockTableEntry> map;
 
-    private HashMap<TransactionId, Node> nodes;
-
-    private int tidorder;
+    public WaitGraph waitgraph;
 
     public LockManagerImpl() {
         map = new HashMap<>();
-        nodes = new HashMap<>();
-        tidorder = 0;
+        waitgraph = new WaitGraph();
     }
 
     @Override
@@ -42,33 +39,19 @@ public class LockManagerImpl implements LockManager {
                     LockTableEntry entry = new LockTableEntry();
                     map.put(pid, entry);
                 }
-                if(!nodes.containsKey(tid)){
-                    tidorder ++;
-                    Node node = new Node(tidorder);
-                    nodes.put(tid,node);
-                }
+                waitgraph.addTid(tid);
+                waitgraph.resetgraph();
                 LockTableEntry tableentry = map.get(pid);
-                nodes.get(tid).waitfor.addAll(tableentry.getLockHolders());
-                nodes.get(tid).waitfor.remove(tid);
-                for(TransactionId alltid: nodes.keySet()){
-                    Node temp = nodes.get(alltid);
-                    temp.ifexisted = "no";
-                }
-                if(deadLockDetection(tid)){
-                    Node currenttid = nodes.get(tid);
-                    for(TransactionId lockholder: tableentry.getLockHolders()){
-                        Node node = nodes.get(lockholder);
-                        if(currenttid.myorder > node.myorder){
-                            throw new TransactionAbortedException();
-                        }
+                waitgraph.addWaitTid(tid, tableentry.getLockHolders());
+                if(waitgraph.deadLockDetection(tid)){
+                    if(!waitgraph.checkOrder(tid)){
+                        throw new TransactionAbortedException();
                     }
                 }
                 LockTableEntry.LockRequest lockrequest =  tableentry.addRequests(tid,perm);
-                if(tableentry.acquireLock(lockrequest, tid, nodes.get(tid))){
+                if(tableentry.acquireLock(lockrequest, tid)){
+                    waitgraph.removeTidFromAllWaitForGraph(tid);
                     waiting = false;
-                    for(TransactionId alltid: nodes.keySet()){
-                        nodes.get(alltid).waitfor.remove(tid);
-                    }
                 }
                 if(waiting){
                     try{
@@ -106,9 +89,7 @@ public class LockManagerImpl implements LockManager {
         }
         LockTableEntry entry = map.get(pid);
         entry.releaseLock(tid);
-        for(TransactionId alltid: nodes.keySet()){
-            nodes.get(alltid).waitfor.remove(tid);
-        }
+        waitgraph.removeTidFromAllWaitForGraph(tid);
         notifyAll();
     }
 
@@ -116,7 +97,6 @@ public class LockManagerImpl implements LockManager {
     public synchronized List<PageId> getPagesForTid(TransactionId tid) {
         ArrayList<PageId> lockedpage = new ArrayList<>();
         for(PageId pid: map.keySet()){
-            LockTableEntry lte = map.get(pid);
             if(holdsLock(tid,pid,Permissions.READ_ONLY)){
                 lockedpage.add(pid);
             }
@@ -130,46 +110,106 @@ public class LockManagerImpl implements LockManager {
         return lte.getLockHolders();
     }
 
-    public synchronized boolean deadLockDetection(TransactionId tid){
-        Node node = nodes.get(tid);
-        if(node.ifexisted.equals("finished")){
+
+    private class WaitGraph{
+
+        // mapping between a tid and other tids this one is waiting for
+        private HashMap<TransactionId, HashSet<TransactionId>> graph;
+
+        // mapping between a tid and its mark used in DFS
+        private HashMap<TransactionId, String> mark;
+
+        // The arrival time of each transaction
+        private List<TransactionId> order;
+
+        private WaitGraph(){
+            graph = new HashMap<>();
+            order = new ArrayList<>();
+            mark = new HashMap<>();
+        }
+
+        /**
+         * Add a tid to the graph
+         * @param tid
+         */
+        private void addTid(TransactionId tid){
+            if(!graph.containsKey(tid)){
+                graph.put(tid, new HashSet<>());
+                mark.put(tid, "No");
+                order.add(tid);
+            }
+        }
+
+        /**
+         * Add all tids that a specific tid waits
+         * @param tid
+         * @param tids a list of tids
+         */
+        private void addWaitTid(TransactionId tid, List<TransactionId> tids){
+            HashSet<TransactionId> wait = graph.get(tid);
+            wait.addAll(tids);
+            wait.remove(tid);
+        }
+
+        /**
+         * Remove this tid from all waitfor list
+         * @param tid
+         */
+        private void removeTidFromAllWaitForGraph(TransactionId tid){
+            for(TransactionId alltid: graph.keySet()){
+                graph.get(alltid).remove(tid);
+            }
+        }
+
+        /**
+         * Reset the graph for next time usage
+         */
+        private void resetgraph(){
+            mark.replaceAll((k,v) -> "No");
+        }
+
+        /**
+         * Check if any holder is order than the requestor
+         * @param tid
+         * @return true if this requestor is the earliest one.
+         */
+        private boolean checkOrder(TransactionId tid){
+            for(TransactionId lockholder: graph.get(tid)){
+                if(order.indexOf(tid) > order.indexOf(lockholder)){
+                    return false;
+                }
+            }
             return true;
         }
-        if(node.waitfor.isEmpty()){
+
+        /**
+         * Check if there is a cicle in the wait-for graph by using DFS
+         * @param tid
+         * @return true if there is a circle
+         */
+        private synchronized boolean deadLockDetection(TransactionId tid){
+            // if this tid has already been marked as finished, that means there is a circle
+            if(mark.get(tid).equals("Finished")){
+                return true;
+            }
+            // reach a leaf
+            if(graph.get(tid).isEmpty()){
+                return false;
+            }
+            mark.put(tid, "Searching");
+            for(TransactionId child: graph.get(tid)){
+                // if the child is searching its child, then there is a circle
+                if(mark.get(child).equals("Searching")){
+                    return true;
+                }
+                // if the child has a circle, then there is a circle
+                if(deadLockDetection(child)){
+                    return true;
+                }
+            }
+            mark.put(tid, "Finished");
             return false;
         }
-        node.ifexisted = "searching";
-        for(TransactionId child: node.waitfor){
-            Node childnode = nodes.get(child);
-            if(childnode.ifexisted.equals("searching")){
-                return true;
-            }
-            if(deadLockDetection(child)){
-                return true;
-            }
-        }
-        node.ifexisted = "finished";
-        return false;
     }
-
-
-
-    public class Node{
-
-        public int myorder;
-
-        public String ifexisted;
-
-        public HashSet<TransactionId> waitfor;
-
-        public Node(int tidorder){
-            waitfor = new HashSet<>();
-            ifexisted = "no";
-            myorder = tidorder;
-        }
-    }
-
-
-
 
 }
