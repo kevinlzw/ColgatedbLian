@@ -54,7 +54,7 @@ public class LockManagerImpl implements LockManager {
                     Node temp = nodes.get(alltid);
                     temp.ifexisted = "no";
                 }
-                if(deadLockDetection(tid)){ 
+                if(deadLockDetection(tid)){
                     Node currenttid = nodes.get(tid);
                     for(TransactionId lockholder: tableentry.getLockHolders()){
                         Node node = nodes.get(lockholder);
