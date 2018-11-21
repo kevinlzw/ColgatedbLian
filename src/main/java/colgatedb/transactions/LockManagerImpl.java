@@ -43,13 +43,16 @@ public class LockManagerImpl implements LockManager {
                 waitgraph.resetgraph();
                 LockTableEntry tableentry = map.get(pid);
                 waitgraph.addWaitTid(tid, tableentry.getLockHolders());
+                // check if there is a circle
                 if(waitgraph.deadLockDetection(tid)){
+                    // implement wait-die policy for deadlock
                     if(!waitgraph.checkOrder(tid)){
                         throw new TransactionAbortedException();
                     }
                 }
                 LockTableEntry.LockRequest lockrequest =  tableentry.addRequests(tid,perm);
-                if(tableentry.acquireLock(lockrequest, tid)){
+                // if the txn got the lock, then it should not wait
+                if(tableentry.acquireLock(lockrequest)){
                     waitgraph.removeTidFromAllWaitForGraph(tid);
                     waiting = false;
                 }
@@ -71,6 +74,7 @@ public class LockManagerImpl implements LockManager {
             return false;
         }
         Permissions permission = entry.getLock(tid);
+        // if this txn has no lock on the page, is should return false
         if(permission == null){
             return false;
         }
@@ -110,7 +114,9 @@ public class LockManagerImpl implements LockManager {
         return lte.getLockHolders();
     }
 
-
+    /**
+     * An inner class for implementing the wait-for graph for deadlock detection
+     */
     private class WaitGraph{
 
         // mapping between a tid and other tids this one is waiting for
@@ -183,7 +189,7 @@ public class LockManagerImpl implements LockManager {
         }
 
         /**
-         * Check if there is a cicle in the wait-for graph by using DFS
+         * Check if there is a circle in the wait-for graph by using DFS
          * @param tid
          * @return true if there is a circle
          */

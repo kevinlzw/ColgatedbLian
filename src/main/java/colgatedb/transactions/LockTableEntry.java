@@ -27,17 +27,19 @@ public class LockTableEntry {
     private Permissions lockType;             // null if no one currently has a lock
     private Set<TransactionId> lockHolders;   // a set of txns currently holding a lock on this page
     private Deque<LockRequest> requests;       // a queue of outstanding requests
-    private int exclusiveinqueue;
+    private int exclusiveinqueue;              // exclusive requests in the queue
 
     public LockTableEntry() {
         lockType = null;
         lockHolders = new HashSet<>();
         requests = new LinkedList<>();
-        // you may wish to add statements here.
         exclusiveinqueue = 0;
     }
 
-
+    /**
+     * return the lockholder as a list
+     * @return lockholder as a list
+     */
     public List<TransactionId> getLockHolders(){
         List<TransactionId> list = new ArrayList<>();
         list.addAll(lockHolders);
@@ -45,17 +47,25 @@ public class LockTableEntry {
     }
 
 
+    /**
+     * add a request to the queue
+     * @param tid the txn waiting to be added
+     * @param lockType the type this txn wants
+     * @return the lockquest created for this txn
+     */
     public LockRequest addRequests(TransactionId tid, Permissions lockType){
         LockRequest lockrequest = new LockRequest(tid, lockType);
         if(lockHolders.contains(tid) && this.lockType == lockType){
             throw new LockManagerException("You have already acquired the lock!");
         }
+        // if the queue has this request, do nothing and return this request
         if(requests.contains(lockrequest)){
             return lockrequest;
         }
         if(lockType == Permissions.READ_WRITE){
             exclusiveinqueue ++;
         }
+        // if the request is a upgrade quest, adds to the front of the list
         if(lockHolders.contains(tid) && lockType == Permissions.READ_WRITE){
             requests.addFirst(lockrequest);
             return lockrequest;
@@ -64,11 +74,18 @@ public class LockTableEntry {
         return lockrequest;
     }
 
-    public boolean acquireLock(LockRequest lockrequest, TransactionId tid){
+    /**
+     * try to acquire a lock for a txn, if succeed, acquire the lock and return true
+     * @param lockrequest
+     * @return true if the txn got the lock, false otherwise
+     */
+    public boolean acquireLock(LockRequest lockrequest){
         if(lockrequest.perm == Permissions.READ_ONLY){
+            // if the current locktype is not exclusive and no exclusive lockquest is waiting, then we can
+            // grant the lock to this request
             if(requests.contains(lockrequest) && lockType != Permissions.READ_WRITE && exclusiveinqueue == 0){
                 this.lockType = Permissions.READ_ONLY;
-                lockHolders.add(tid);
+                lockHolders.add(lockrequest.tid);
                 requests.remove(lockrequest);
                 return true;
             }
@@ -78,10 +95,13 @@ public class LockTableEntry {
         }
         // lockrequest.perm == Permissions.READ_WRITE
         else{
-            if(requests.getFirst().equals(lockrequest) && (lockType == null || (lockHolders.size() == 1 && lockHolders.contains(tid)))){
+            // if the current locktype is null or only the txn itself is holding the shared lock, then we
+            // can grant the exclusive lock
+            if(requests.getFirst().equals(lockrequest) && (lockType == null || (lockHolders.size() == 1 && lockHolders.contains(lockrequest.tid)))){
                 this.lockType = Permissions.READ_WRITE;
-                lockHolders.add(tid);
+                lockHolders.add(lockrequest.tid);
                 requests.removeFirst();
+                exclusiveinqueue --;
                 return true;
             }
             else{
@@ -90,36 +110,26 @@ public class LockTableEntry {
         }
     }
 
+    /**
+     * release the lock for a specific tid
+     * @param tid
+     */
     public void releaseLock(TransactionId tid){
-        if(lockType == Permissions.READ_WRITE && lockHolders.contains(tid)){
-            exclusiveinqueue --;
-        }
         lockHolders.remove(tid);
         if(lockHolders.size() == 0){
             lockType = null;
         }
     }
 
-    public boolean ifEmpty(){
-        return requests.size() == 0;
-    }
-
-    public boolean ifNoLock(){
-        return lockType == null;
-    }
-
+    /**
+     * return the locktype for a txn. null if this txn does not hold any lock
+     * @param tid
+     * @return
+     */
     public Permissions getLock(TransactionId tid){
-        if(lockHolders.contains(tid)){
-            return lockType;
-        }
-        else{
-            return null;
-        }
+        return lockHolders.contains(tid) ? lockType : null;
     }
 
-
-
-    // you may wish to implement methods here.
 
     /**
      * A class representing a single lock request.  Simply tracks the txn and the desired lock type.
