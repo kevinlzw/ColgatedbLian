@@ -1,6 +1,5 @@
 package colgatedb.transactions;
 
-import colgatedb.page.Page;
 import colgatedb.page.PageId;
 
 import java.util.*;
@@ -21,9 +20,11 @@ import java.util.*;
  */
 public class LockManagerImpl implements LockManager {
 
+    // store pid, tableentry pair
     private HashMap<PageId,LockTableEntry> map;
 
-    public WaitGraph waitgraph;
+    // wairgraph object for deadlock detection
+    private WaitGraph waitgraph;
 
     public LockManagerImpl() {
         map = new HashMap<>();
@@ -40,7 +41,7 @@ public class LockManagerImpl implements LockManager {
                     map.put(pid, entry);
                 }
                 waitgraph.addTid(tid);
-                waitgraph.resetgraph();
+                waitgraph.resetGraph();
                 LockTableEntry tableentry = map.get(pid);
                 waitgraph.addWaitTid(tid, tableentry.getLockHolders());
                 // check if there is a circle
@@ -91,8 +92,7 @@ public class LockManagerImpl implements LockManager {
         if(!holdsLock(tid,pid,Permissions.READ_ONLY)){
             throw new LockManagerException("This transaction does not hold any locks!");
         }
-        LockTableEntry entry = map.get(pid);
-        entry.releaseLock(tid);
+        map.get(pid).releaseLock(tid);
         waitgraph.removeTidFromAllWaitForGraph(tid);
         notifyAll();
     }
@@ -170,7 +170,7 @@ public class LockManagerImpl implements LockManager {
         /**
          * Reset the graph for next time usage
          */
-        private void resetgraph(){
+        private void resetGraph(){
             mark.replaceAll((k,v) -> "No");
         }
 
