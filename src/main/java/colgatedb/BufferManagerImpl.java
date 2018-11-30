@@ -4,8 +4,8 @@ import colgatedb.page.Page;
 import colgatedb.page.PageId;
 import colgatedb.page.PageMaker;
 
-import java.awt.*;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**

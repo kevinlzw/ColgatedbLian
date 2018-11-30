@@ -1,19 +1,19 @@
 package colgatedb.dbfile;
 
-import colgatedb.BufferManager;
+import colgatedb.AccessManager;
 import colgatedb.Database;
-import colgatedb.DbException;
-import colgatedb.page.*;
+import colgatedb.page.PageId;
+import colgatedb.page.SimplePageId;
+import colgatedb.page.SlottedPage;
+import colgatedb.page.SlottedPageMaker;
+import colgatedb.transactions.Permissions;
 import colgatedb.transactions.TransactionAbortedException;
 import colgatedb.transactions.TransactionId;
-import colgatedb.tuple.RecordId;
 import colgatedb.tuple.Tuple;
 import colgatedb.tuple.TupleDesc;
+import javafx.css.CssParser;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -46,7 +46,7 @@ public class HeapFile implements DbFile {
     private TupleDesc td;
     private int tableid;
     private int numPages;
-    private BufferManager buffermanager;
+    private AccessManager accessmanager;
 
     /**
      * Creates a heap file.
@@ -60,7 +60,7 @@ public class HeapFile implements DbFile {
         this.numPages = numPages;
         this.tableid = tableid;
         this.td = td;
-        buffermanager = Database.getBufferManager();
+        accessmanager = Database.getAccessManager();
     }
 
     /**
@@ -85,39 +85,61 @@ public class HeapFile implements DbFile {
      * Finds an appropriate page to insert a tuple or allocates a new page if pages in the heapfile are all full
      * @return the page that can be inserted
      */
-    private SlottedPage findAppropriatePage(){
+    private SlottedPage findAppropriatePage(TransactionId tid){
         // finds a page with empty slots in it
         for (int i = 0; i < numPages; i ++){
             SimplePageId pid = new SimplePageId(tableid,i);
-            SlottedPage temp = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
+            boolean justacquire = false;
+            if(accessmanager.holdsLock(tid,pid, Permissions.READ_ONLY)){
+                justacquire = true;
+            }
+            try{
+                accessmanager.acquireLock(tid, pid, Permissions.READ_ONLY);
+            }
+            catch (TransactionAbortedException e){
+            }
+            SlottedPage temp = (SlottedPage) accessmanager.pinPage(tid,pid,pageMaker);
             if (temp.getNumEmptySlots() != 0){
+                try{
+                    accessmanager.acquireLock(tid, pid, Permissions.READ_WRITE);
+                }
+                catch (TransactionAbortedException e){
+                }
                 return temp;
             }
-            buffermanager.unpinPage(pid,false);
+            if(!justacquire){
+                accessmanager.releaseLock(tid,pid);
+            }
+            accessmanager.unpinPage(tid, temp,false);
         }
         // No empty slots available, needs to allocate a new page
         SimplePageId newpid= new SimplePageId(tableid,numPages);
         numPages ++;
-        buffermanager.allocatePage(newpid);
-        SlottedPage newpage = (SlottedPage) buffermanager.pinPage(newpid,pageMaker);
+        accessmanager.allocatePage(newpid);
+        try{
+            accessmanager.acquireLock(tid, newpid, Permissions.READ_WRITE);
+        }
+        catch (TransactionAbortedException e){
+        }
+        SlottedPage newpage = (SlottedPage) accessmanager.pinPage(tid,newpid,pageMaker);
         return newpage;
     }
 
 
     @Override
     public void insertTuple(TransactionId tid, Tuple t) throws TransactionAbortedException {
-        SlottedPage page = findAppropriatePage();
+        SlottedPage page = findAppropriatePage(tid);
         page.insertTuple(t);
-        buffermanager.unpinPage(page.getId(),true);
+        accessmanager.unpinPage(tid,page,true);
     }
 
 
     @Override
     public void deleteTuple(TransactionId tid, Tuple t) throws TransactionAbortedException {
         PageId pid = t.getRecordId().getPageId();
-        SlottedPage page = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
+        SlottedPage page = (SlottedPage) accessmanager.pinPage(tid,pid,pageMaker);
         page.deleteTuple(t);
-        buffermanager.unpinPage(pid,true);
+        accessmanager.unpinPage(tid, page,true);
     }
 
     @Override
@@ -138,8 +160,11 @@ public class HeapFile implements DbFile {
 
         private Iterator<Tuple> pageiterator;
 
+        private TransactionId tid;
+
         public HeapFileIterator(TransactionId tid) {
             currentpage = 0;
+            this.tid = tid;
         }
 
         @Override
@@ -158,7 +183,7 @@ public class HeapFile implements DbFile {
             // sets up a new page to iterate
             if (page == null){
                 SimplePageId pid = new SimplePageId(tableid,currentpage);
-                page = (SlottedPage) buffermanager.pinPage(pid,pageMaker);
+                page = (SlottedPage) accessmanager.pinPage(tid,pid,pageMaker);
                 pageiterator = page.iterator();
             }
             boolean iftuple = pageiterator.hasNext();
@@ -167,8 +192,7 @@ public class HeapFile implements DbFile {
             }
             // no available slots in this page, needs to iterate the next page
             else {
-                SimplePageId pid = (SimplePageId) page.getId();
-                buffermanager.unpinPage(pid,false);
+                accessmanager.unpinPage(tid,page,false);
                 page = null;
                 currentpage ++;
                 return hasNext();
@@ -187,8 +211,7 @@ public class HeapFile implements DbFile {
         public void rewind() throws TransactionAbortedException {
             currentpage = 0;
             if (page != null){
-                SimplePageId pid = (SimplePageId) page.getId();
-                buffermanager.unpinPage(pid, false);
+                accessmanager.unpinPage(tid, page, false);
                 page = null;
             }
             pageiterator = null;
@@ -197,8 +220,7 @@ public class HeapFile implements DbFile {
         @Override
         public void close() {
             if (page != null){
-                SimplePageId pid = (SimplePageId) page.getId();
-                buffermanager.unpinPage(pid,false);
+                accessmanager.unpinPage(tid, page,false);
                 page = null;
                 pageiterator = null;
             }
