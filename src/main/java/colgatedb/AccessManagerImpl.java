@@ -45,6 +45,7 @@ public class AccessManagerImpl implements AccessManager {
         buffermanager = bm;
         record = new HashMap<>();
         lockmanager = new LockManagerImpl();
+        buffermanager.evictDirty(false);
     }
 
     @Override
@@ -67,10 +68,14 @@ public class AccessManagerImpl implements AccessManager {
         synchronized (this){
             if(!record.containsKey(pid)){
                 record.put(pid, new HashMap<>());
+                record.get(pid).put(tid, 1);
             }
             else{
                 Map<TransactionId, Integer> list = record.get(pid);
-                if(list.containsKey(tid)){
+                if(list == null){
+                    list = new HashMap<>();
+                }
+                if(!list.containsKey(tid)){
                     list.put(tid, 1);
                 }
                 else{
@@ -108,7 +113,7 @@ public class AccessManagerImpl implements AccessManager {
         }
         if(commit && force){
             for(PageId pid: record.keySet()){
-                if(record.get(pid).containsKey(tid)){
+                if(buffermanager.isDirty(pid)){
                     buffermanager.flushPage(pid);
                 }
             }
@@ -126,7 +131,6 @@ public class AccessManagerImpl implements AccessManager {
                 }
             }
         }
-
     }
 
     @Override

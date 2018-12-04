@@ -3,9 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="051dc165-a9b6-49d7-91e7-192a0790e77f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/AccessManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/AccessManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/BufferManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/BufferManagerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/AccessManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/AccessManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/dbfile/HeapFile$HeapFileIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/dbfile/HeapFile$HeapFileIterator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/dbfile/HeapFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/dbfile/HeapFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/transactions/LockManagerImpl$WaitGraph.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/transactions/LockManagerImpl$WaitGraph.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/transactions/LockManagerImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/transactions/LockManagerImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/colgatedb/transactions/LockTableEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/colgatedb/transactions/LockTableEntry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/AccessManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/AccessManagerImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/dbfile/HeapFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/dbfile/HeapFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,21 +29,21 @@
     <session id="377818079">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="83" />
+          <entry key="project.closed" value="88" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.10" value="17" />
+          <entry key="project.open.time.10" value="18" />
           <entry key="project.open.time.11" value="12" />
           <entry key="project.open.time.12" value="4" />
           <entry key="project.open.time.13" value="4" />
-          <entry key="project.open.time.14" value="2" />
+          <entry key="project.open.time.14" value="3" />
           <entry key="project.open.time.15" value="2" />
           <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="2" />
-          <entry key="project.open.time.8" value="17" />
-          <entry key="project.open.time.9" value="23" />
-          <entry key="project.opened" value="88" />
+          <entry key="project.open.time.8" value="18" />
+          <entry key="project.open.time.9" value="25" />
+          <entry key="project.opened" value="93" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -49,7 +55,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="15" />
-          <entry key="JAVA" value="392" />
+          <entry key="JAVA" value="413" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -59,7 +65,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="33181" />
+          <entry key="JAVA" value="33362" />
         </counts>
       </usages-collector>
     </session>
@@ -68,12 +74,30 @@
     <favorites_list name="colgatedb" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/AccessManagerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="123" column="53" selection-start-line="123" selection-start-column="53" selection-end-line="123" selection-end-column="53" />
+            <state relative-caret-position="193">
+              <caret line="114" column="25" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/operators/InsertTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="66" column="21" lean-forward="true" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Insert.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="990">
+              <caret line="122" column="16" lean-forward="true" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -81,20 +105,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/dbfile/HeapFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-75">
-              <caret line="87" column="63" selection-start-line="87" selection-start-column="63" selection-end-line="87" selection-end-column="63" />
+            <state relative-caret-position="212">
+              <caret line="143" column="5" lean-forward="true" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#5128#5129#0" expanded="true" />
+                <element signature="e#5176#5177#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="930">
-              <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -102,26 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/AccessManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/Transaction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/logging/LogFileImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2895">
-              <caret line="204" column="18" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="18" />
+            <state relative-caret-position="368">
+              <caret line="50" column="9" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -129,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/BufferManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+            <state relative-caret-position="269">
+              <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -138,13 +137,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/BufferManagerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1740">
-              <caret line="126" column="53" selection-start-line="126" selection-start-column="53" selection-end-line="126" selection-end-column="53" />
+            <state relative-caret-position="424">
+              <caret line="89" column="12" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3781#3782#0" expanded="true" />
                 <element signature="e#3826#3827#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/Transaction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="329">
+              <caret line="63" column="47" lean-forward="true" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -235,9 +243,9 @@
         <option value="$PROJECT_DIR$/src/main/java/tutorials/concurrency_tutorial/ZigZagThreads.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java" />
         <option value="$PROJECT_DIR$/src/test/java/colgatedb/transactions/LockScheduleTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/BufferManagerImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/dbfile/HeapFile.java" />
         <option value="$PROJECT_DIR$/src/main/java/colgatedb/AccessManagerImpl.java" />
       </list>
@@ -249,7 +257,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="972" />
     <option name="y" value="16" />
     <option name="width" value="1312" />
@@ -261,6 +269,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -332,13 +341,19 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
+              <item name="dbfile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="colgatedb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="colgatedb" type="462c0819:PsiDirectoryNode" />
               <item name="transactions" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -346,7 +361,7 @@
     <property name="SearchEverywhereHistoryKey" value="{&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543555438474" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543885512352" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -366,66 +381,66 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.colgatedb.transactions in test">
-    <configuration name="ConcurrencyControlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AccessManagerTest">
+    <configuration name="AccessManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="colgatedb.transactions.*" />
+          <option name="PATTERN" value="colgatedb.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="colgatedb.transactions" />
-      <option name="MAIN_CLASS_NAME" value="colgatedb.transactions.ConcurrencyControlTest" />
+      <option name="PACKAGE_NAME" value="colgatedb" />
+      <option name="MAIN_CLASS_NAME" value="colgatedb.AccessManagerTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LockScheduleMoreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HeapFileMoreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="colgatedb.transactions.*" />
+          <option name="PATTERN" value="colgatedb.dbfile.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="colgatedb.transactions" />
-      <option name="MAIN_CLASS_NAME" value="colgatedb.transactions.LockScheduleMoreTest" />
+      <option name="PACKAGE_NAME" value="colgatedb.dbfile" />
+      <option name="MAIN_CLASS_NAME" value="colgatedb.dbfile.HeapFileMoreTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LockScheduleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HeapFileTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="colgatedb.transactions.*" />
+          <option name="PATTERN" value="colgatedb.dbfile.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="colgatedb.transactions" />
-      <option name="MAIN_CLASS_NAME" value="colgatedb.transactions.LockScheduleTest" />
+      <option name="PACKAGE_NAME" value="colgatedb.dbfile" />
+      <option name="MAIN_CLASS_NAME" value="colgatedb.dbfile.HeapFileTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LockScheduleTest.upgradeRequestCutsInLine3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InsertTest.getNext" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="colgatedb.transactions.*" />
+          <option name="PATTERN" value="colgatedb.operators.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="colgatedb.transactions" />
-      <option name="MAIN_CLASS_NAME" value="colgatedb.transactions.LockScheduleTest" />
-      <option name="METHOD_NAME" value="upgradeRequestCutsInLine3" />
+      <option name="PACKAGE_NAME" value="colgatedb.operators" />
+      <option name="MAIN_CLASS_NAME" value="colgatedb.operators.InsertTest" />
+      <option name="METHOD_NAME" value="getNext" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="colgatedb.transactions in test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TransactionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <extension name="coverage">
         <pattern>
@@ -434,25 +449,25 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="colgatedb.transactions" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="colgatedb.transactions.TransactionTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.LockScheduleMoreTest" />
-      <item itemvalue="JUnit.ConcurrencyControlTest" />
-      <item itemvalue="JUnit.colgatedb.transactions in test" />
-      <item itemvalue="JUnit.LockScheduleTest.upgradeRequestCutsInLine3" />
-      <item itemvalue="JUnit.LockScheduleTest" />
+      <item itemvalue="JUnit.AccessManagerTest" />
+      <item itemvalue="JUnit.InsertTest.getNext" />
+      <item itemvalue="JUnit.HeapFileTest" />
+      <item itemvalue="JUnit.HeapFileMoreTest" />
+      <item itemvalue="JUnit.TransactionTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.colgatedb.transactions in test" />
-        <item itemvalue="JUnit.LockScheduleTest" />
-        <item itemvalue="JUnit.LockScheduleTest.upgradeRequestCutsInLine3" />
-        <item itemvalue="JUnit.ConcurrencyControlTest" />
-        <item itemvalue="JUnit.LockScheduleMoreTest" />
+        <item itemvalue="JUnit.AccessManagerTest" />
+        <item itemvalue="JUnit.TransactionTest" />
+        <item itemvalue="JUnit.HeapFileMoreTest" />
+        <item itemvalue="JUnit.HeapFileTest" />
+        <item itemvalue="JUnit.InsertTest.getNext" />
       </list>
     </recent_temporary>
   </component>
@@ -553,50 +568,55 @@
       <workItem from="1543343411840" duration="6055000" />
       <workItem from="1543548083450" duration="142000" />
       <workItem from="1543548309116" duration="7045000" />
-      <workItem from="1543591560452" duration="489000" />
+      <workItem from="1543591560452" duration="1185000" />
+      <workItem from="1543611449982" duration="1698000" />
+      <workItem from="1543641129418" duration="28000" />
+      <workItem from="1543701859937" duration="601000" />
+      <workItem from="1543710894163" duration="153000" />
+      <workItem from="1543879726688" duration="5202000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LockScheduleTest - 2018.11.17 at 21h 48m 37s.xml">
-      <configuration name="LockScheduleTest" configurationId="JUnit" />
+    <history-entry file="All_in_test - 2018.12.03 at 19h 43m 20s.xml">
+      <configuration name="All in test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine3 - 2018.11.17 at 22h 01m 15s.xml">
-      <configuration name="LockScheduleTest.upgradeRequestCutsInLine3" configurationId="JUnit" />
+    <history-entry file="InsertTest_getNext - 2018.12.03 at 19h 43m 47s.xml">
+      <configuration name="InsertTest.getNext" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LockScheduleTest_upgradeRequestCutsInLine3 - 2018.11.17 at 22h 09m 20s.xml">
-      <configuration name="LockScheduleTest.upgradeRequestCutsInLine3" configurationId="JUnit" />
+    <history-entry file="HeapFileTest - 2018.12.03 at 19h 44m 26s.xml">
+      <configuration name="HeapFileTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LockScheduleTest - 2018.11.17 at 22h 09m 30s.xml">
-      <configuration name="LockScheduleTest" configurationId="JUnit" />
+    <history-entry file="HeapFileMoreTest - 2018.12.03 at 19h 44m 31s.xml">
+      <configuration name="HeapFileMoreTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="colgatedb_transactions_in_test - 2018.11.17 at 22h 09m 43s.xml">
-      <configuration name="colgatedb.transactions in test" configurationId="JUnit" />
+    <history-entry file="AccessManagerTest - 2018.12.03 at 19h 44m 35s.xml">
+      <configuration name="AccessManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="colgatedb_transactions_in_test - 2018.11.19 at 16h 47m 45s.xml">
-      <configuration name="colgatedb.transactions in test" configurationId="JUnit" />
+    <history-entry file="TransactionTest - 2018.12.03 at 19h 44m 40s.xml">
+      <configuration name="TransactionTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="colgatedb_transactions_in_test - 2018.11.19 at 17h 11m 40s.xml">
-      <configuration name="colgatedb.transactions in test" configurationId="JUnit" />
+    <history-entry file="TransactionTest - 2018.12.03 at 20h 00m 36s.xml">
+      <configuration name="TransactionTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="colgatedb_transactions_in_test - 2018.11.19 at 17h 11m 55s.xml">
-      <configuration name="colgatedb.transactions in test" configurationId="JUnit" />
+    <history-entry file="AccessManagerTest - 2018.12.03 at 20h 00m 41s.xml">
+      <configuration name="AccessManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="colgatedb_transactions_in_test - 2018.11.21 at 10h 32m 15s.xml">
-      <configuration name="colgatedb.transactions in test" configurationId="JUnit" />
+    <history-entry file="AccessManagerTest - 2018.12.03 at 20h 03m 10s.xml">
+      <configuration name="AccessManagerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="colgatedb_transactions_in_test - 2018.11.21 at 10h 41m 01s.xml">
-      <configuration name="colgatedb.transactions in test" configurationId="JUnit" />
+    <history-entry file="AccessManagerTest - 2018.12.03 at 20h 04m 09s.xml">
+      <configuration name="AccessManagerTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="246187000" />
+    <option name="totallyTimeSpent" value="254565000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.36761135" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.29878542" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -605,7 +625,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.5008881" side_tool="true" weight="0.29797572" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32740214" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.34875444" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34875444" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39323843" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -732,6 +752,22 @@
           <properties />
           <option name="timeStamp" value="66" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/colgatedb/BufferManager.java</url>
+          <line>37</line>
+          <properties class="colgatedb.BufferManager" method="unpinPage">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/colgatedb/AccessManager.java</url>
+          <line>50</line>
+          <properties class="colgatedb.AccessManager" method="unpinPage">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -743,41 +779,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/operators/IntegerAggregatorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/operators/StringAggregatorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/IntegerAggregator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/StringAggregator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="78" column="34" lean-forward="true" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/DbIterator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="35" column="9" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/operators/AggregateTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1590">
@@ -796,13 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
           <caret line="110" column="22" lean-forward="true" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Insert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
-          <caret line="99" column="23" selection-start-line="99" selection-start-column="23" selection-end-line="99" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -831,18 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-          <folding>
-            <element signature="e#1316#1317#0" expanded="true" />
-            <element signature="e#1344#1345#0" expanded="true" />
-            <element signature="e#1413#1414#0" expanded="true" />
-            <element signature="e#1438#1439#0" expanded="true" />
-            <element signature="e#1514#1515#0" expanded="true" />
-            <element signature="e#1544#1545#0" expanded="true" />
-            <element signature="e#1959#1960#0" expanded="true" />
-            <element signature="e#2019#2020#0" expanded="true" />
-            <element signature="e#2166#2167#0" expanded="true" />
-            <element signature="e#2243#2244#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -864,9 +846,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="47" column="53" lean-forward="true" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
-          <folding>
-            <element signature="method#main#0;class#SynchronizedThreads#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -965,10 +944,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-285">
           <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-          <folding>
-            <element signature="e#3108#3109#0" expanded="true" />
-            <element signature="e#3133#3134#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1021,16 +996,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2010">
-          <caret line="137" column="30" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManagerException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1059,13 +1024,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/AccessManagerTestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="930">
@@ -1073,38 +1031,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/AccessManager.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/BufferManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
+        <state relative-caret-position="-1398">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/Transaction.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/RecordIdTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
+        <state relative-caret-position="-466">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/AccessManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2220">
+          <caret line="161" column="79" selection-start-line="161" selection-start-column="79" selection-end-line="161" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/transactions/TransactionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/LockTableEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="83" column="24" selection-start-line="83" selection-start-column="24" selection-end-line="83" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/logging/LogFileImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2895">
+        <state relative-caret-position="479">
           <caret line="204" column="18" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/BufferManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/transactions/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+        <state relative-caret-position="329">
+          <caret line="63" column="47" lean-forward="true" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/BufferManagerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
-          <caret line="126" column="53" selection-start-line="126" selection-start-column="53" selection-end-line="126" selection-end-column="53" />
+        <state relative-caret-position="424">
+          <caret line="89" column="12" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3781#3782#0" expanded="true" />
@@ -1113,20 +1092,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/operators/InsertTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="66" column="21" lean-forward="true" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/operators/Insert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="122" column="16" lean-forward="true" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/BufferManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/AccessManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="50" column="9" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/dbfile/HeapFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-75">
-          <caret line="87" column="63" selection-start-line="87" selection-start-column="63" selection-end-line="87" selection-end-column="63" />
+        <state relative-caret-position="212">
+          <caret line="143" column="5" lean-forward="true" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5128#5129#0" expanded="true" />
+            <element signature="e#5176#5177#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/colgatedb/AccessManagerTestBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
+          <folding>
+            <element signature="e#3381#3382#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/colgatedb/AccessManagerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="123" column="53" selection-start-line="123" selection-start-column="53" selection-end-line="123" selection-end-column="53" />
+        <state relative-caret-position="193">
+          <caret line="114" column="25" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
         </state>
       </provider>
     </entry>

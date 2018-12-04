@@ -11,7 +11,6 @@ import colgatedb.transactions.TransactionAbortedException;
 import colgatedb.transactions.TransactionId;
 import colgatedb.tuple.Tuple;
 import colgatedb.tuple.TupleDesc;
-import javafx.css.CssParser;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -115,7 +114,9 @@ public class HeapFile implements DbFile {
         // No empty slots available, needs to allocate a new page
         SimplePageId newpid= new SimplePageId(tableid,numPages);
         numPages ++;
-        accessmanager.allocatePage(newpid);
+        synchronized (this){
+            accessmanager.allocatePage(newpid);
+        }
         try{
             accessmanager.acquireLock(tid, newpid, Permissions.READ_WRITE);
         }

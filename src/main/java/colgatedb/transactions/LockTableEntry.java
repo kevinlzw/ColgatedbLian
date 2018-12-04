@@ -56,7 +56,7 @@ public class LockTableEntry {
     public LockRequest addRequests(TransactionId tid, Permissions lockType){
         LockRequest lockrequest = new LockRequest(tid, lockType);
         if(lockHolders.contains(tid) && this.lockType == lockType){
-            throw new LockManagerException("You have already acquired the lock!");
+            return null;
         }
         // if the queue has this request, do nothing and return this request
         if(requests.contains(lockrequest)){
@@ -80,6 +80,9 @@ public class LockTableEntry {
      * @return true if the txn got the lock, false otherwise
      */
     public boolean acquireLock(LockRequest lockrequest){
+        if(lockrequest == null){
+            return true;
+        }
         if(lockrequest.perm == Permissions.READ_ONLY){
             // if the current locktype is not exclusive and no exclusive lockquest is waiting, then we can
             // grant the lock to this request
