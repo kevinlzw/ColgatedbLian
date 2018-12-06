@@ -1,5 +1,6 @@
 package colgatedb.page;
 
+import colgatedb.Database;
 import colgatedb.tuple.Tuple;
 import colgatedb.tuple.RecordId;
 import colgatedb.tuple.TupleDesc;
@@ -61,6 +62,12 @@ public class SlottedPage implements Page {
         header = new BitSet(numberslot);
         setBeforeImage();
     }
+
+
+    public SlottedPage(PageId pid, byte[] bytes) {
+        this(pid, Database.getCatalog().getTupleDesc(pid.getTableId()), bytes.length, bytes);
+    }
+
 
     /**
      * Constructs SlottedPage with its data initialized according to last parameter

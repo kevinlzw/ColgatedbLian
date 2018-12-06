@@ -1,10 +1,13 @@
 package colgatedb;
 
+import colgatedb.logging.LogFileImpl;
 import colgatedb.page.Page;
 import colgatedb.page.PageId;
 import colgatedb.page.PageMaker;
 import colgatedb.transactions.*;
 
+import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.nio.Buffer;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -45,7 +48,7 @@ public class AccessManagerImpl implements AccessManager {
         buffermanager = bm;
         record = new HashMap<>();
         lockmanager = new LockManagerImpl();
-        buffermanager.evictDirty(false);
+        //buffermanager.evictDirty(false);
     }
 
     @Override
@@ -90,6 +93,9 @@ public class AccessManagerImpl implements AccessManager {
     public void unpinPage(TransactionId tid, Page page, boolean isDirty) {
         buffermanager.unpinPage(page.getId(),isDirty);
         synchronized (this){
+            if(isDirty){
+                Database.getLogFile().logWrite(tid, page.getBeforeImage(), page);
+            }
             Map<TransactionId, Integer> list = record.get(page.getId());
             list.put(tid, list.get(tid) - 1);
         }
@@ -108,17 +114,18 @@ public class AccessManagerImpl implements AccessManager {
     @Override
     public void transactionComplete(TransactionId tid, boolean commit) {
         List<PageId> unlockpage = lockmanager.getPagesForTid(tid);
-        for(int i = 0; i < unlockpage.size(); i ++){
-            lockmanager.releaseLock(tid,unlockpage.get(i));
-        }
-        if(commit && force){
-            for(PageId pid: record.keySet()){
-                if(buffermanager.isDirty(pid)){
-                    buffermanager.flushPage(pid);
+        if(commit){
+            Database.getLogFile().force();
+            if(force) {
+                for (PageId pid : record.keySet()) {
+                    if (buffermanager.isDirty(pid)) {
+                        buffermanager.getPage(pid).setBeforeImage();
+                        buffermanager.flushPage(pid);
+                    }
                 }
             }
         }
-        else if(!commit){
+        else{
             for(PageId pid: record.keySet()){
                 if(record.get(pid).containsKey(tid)){
                     while(record.get(pid).get(tid) != 0){
@@ -131,10 +138,13 @@ public class AccessManagerImpl implements AccessManager {
                 }
             }
         }
+        for(int i = 0; i < unlockpage.size(); i ++){
+            lockmanager.releaseLock(tid,unlockpage.get(i));
+        }
     }
 
     @Override
     public void setForce(boolean force) {
-        // you do NOT need to implement this for lab10.  this will be changed in a later lab.
+        this.force = force;
     }
 }
